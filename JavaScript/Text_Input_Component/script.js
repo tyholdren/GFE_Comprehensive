@@ -7,6 +7,7 @@ export class Form {
 
   initialize() {
     const form = document.createElement('form');
+    form.classList.add('form-container');
     DATA.forEach((el, index) => {
       const input = new InputComponent(el, index);
       const inputEl = input.initialize();
@@ -26,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
 const BASE_DATA = {
   label: 'Email',
   inputType: 'email',
-  placeholder: 'name @ email.com',
-  errorMessage: 'This is an error message',
+  placeholder: 'name@email.com',
+  errorMessage: null,
   hintText: 'This is a hint text',
   trailingIcon: true,
 };
@@ -55,6 +56,8 @@ const DATA = [
   },
   {
     ...BASE_DATA,
+    hintText: null,
+    errorMessage: 'This is an error message',
     leadingIcon: null,
     state: 'error',
   },

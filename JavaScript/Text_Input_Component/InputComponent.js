@@ -22,6 +22,8 @@ export class InputComponent {
     const errorEl = document.createElement('span');
     const hintTextEl = document.createElement('span');
 
+    inputContainer.classList.add('input-container');
+
     inputEl.id = `${inputType}-${this.id}`;
     inputEl.classList.add('input');
     inputEl.type = inputType;

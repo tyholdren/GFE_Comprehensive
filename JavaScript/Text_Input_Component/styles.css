@@ -2,6 +2,31 @@
   box-sizing: border-box;
 }
 
+.text-input-container {
+  width: 340px;
+  height: 512px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 48px;
+}
+
+.input {
+  max-width: 100%;
+}
+
 .input:focus {
   outline-color: green;
 }
