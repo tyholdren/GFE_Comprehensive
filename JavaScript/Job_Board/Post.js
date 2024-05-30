@@ -24,9 +24,7 @@ export class Post {
     authorEl.textContent = by;
     dateEl.textContent = this.formatDate(time);
 
-    postContainerEl.appendChild(titleEl);
-    postContainerEl.appendChild(authorEl);
-    postContainerEl.appendChild(dateEl);
+    postContainerEl.append(titleEl, authorEl, dateEl);
 
     return postContainerEl;
   }

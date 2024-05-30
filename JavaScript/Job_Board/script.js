@@ -2,76 +2,76 @@ import { Post } from './Post.js';
 
 export class App {
   constructor() {
-    this.appContainer = document.getElementById('app-container');
-    this.jobPostingsContainer = document.getElementById(
+    this.$appContainer = document.getElementById('app-container');
+    this.$jobPostingsContainer = document.getElementById(
       'job-postings-container'
     );
+    this.$loadJobsButton = document.createElement('button');
     this.jobIds = [];
-    this.pageSize = 0;
-    this.url = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
-    this.loadingIndicator = null;
+    this.page = 0;
+    this.PAGE_SIZE = 6;
+    this.start = this.page * this.PAGE_SIZE;
+    this.end = this.start + this.PAGE_SIZE;
+
+    this.URL = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
   }
 
   async initialize() {
-    const headerEl = document.createElement('h1');
-    const loadingEl = document.createElement('div');
-    const loadJobsButton = document.createElement('button');
+    const $headerEl = document.createElement('h1');
+    const $loadingEl = document.createElement('div');
     const footerContainer = document.createElement('div');
 
-    loadingEl.textContent = 'Loading jobs...';
-    loadingEl.hidden = true;
-    this.loadingIndicator = loadingEl;
+    let loadingIndicator = null;
+    $loadingEl.textContent = 'Loading jobs...';
+    $loadingEl.hidden = false;
+    loadingIndicator = $loadingEl;
 
-    this.appContainer.appendChild(this.jobPostingsContainer);
-    footerContainer.appendChild(this.loadingIndicator);
-    this.appContainer.appendChild(footerContainer);
+    this.$appContainer.appendChild(this.$jobPostingsContainer);
+    footerContainer.appendChild(loadingIndicator);
+    this.$appContainer.appendChild(footerContainer);
 
-    this.toggleLoadingIndicator(false);
+    $headerEl.textContent = 'Hacker News Jobs Board';
+    this.$loadJobsButton.textContent = 'Load More Jobs';
 
-    headerEl.textContent = 'Hacker News Jobs Board';
-    loadJobsButton.textContent = 'Load More Jobs';
+    this.$loadJobsButton.addEventListener('click', async () => {
+      this.setIsFetchingJobs(true);
 
-    loadJobsButton.addEventListener('click', async () => {
-      this.toggleLoadingIndicator(false);
-      const postIds = this.jobIds.slice(this.pageSize, this.pageSize + 6);
-      this.pageSize += 6;
+      const postIds = this.jobIds.slice(this.start, this.end);
+      this.page += 1;
       const posts = await this.fetchPosts(postIds);
       this.renderPosts(posts);
-      this.toggleLoadingIndicator(true);
+      this.setIsFetchingJobs(false);
     });
 
-    this.jobPostingsContainer.appendChild(headerEl);
+    this.$jobPostingsContainer.appendChild($headerEl);
 
     this.jobIds = await this.fetchJobIds();
-    const curSelection = this.jobIds.slice(this.pageSize, this.pageSize + 6);
-    this.pageSize += 6;
+    const curSelection = this.jobIds.slice(this.start, this.end);
+    this.page += 1;
     const posts = await this.fetchPosts(curSelection);
     this.renderPosts(posts);
+    $loadingEl.hidden = true;
 
-    this.toggleLoadingIndicator(true);
-
-    footerContainer.appendChild(loadJobsButton);
+    footerContainer.appendChild(this.$loadJobsButton);
   }
 
-  toggleLoadingIndicator(shouldDisplay) {
-    this.loadingIndicator.hidden = shouldDisplay;
+  setIsFetchingJobs(shouldDisplay) {
+    this.$loadJobsButton.disabled = shouldDisplay;
+    this.$loadJobsButton.textContent = shouldDisplay
+      ? 'Loading Jobs...'
+      : 'Load More Jobs';
   }
 
   async renderPosts(posts) {
-    const fragment = document.createDocumentFragment();
-    posts.forEach(post => {
-      const jobDetails = new Post(post);
-      const jobEl = jobDetails.render();
-      fragment.append(jobEl);
-    });
-    this.jobPostingsContainer.appendChild(fragment);
+    const $fragmentEl = document.createDocumentFragment();
+    $fragmentEl.append(...posts.map(post => new Post(post).render()));
+    this.$jobPostingsContainer.appendChild($fragmentEl);
   }
 
   async fetchJobIds() {
     try {
-      const response = await fetch(this.url);
-      const data = await response.json();
-      return data;
+      const response = await fetch(this.URL);
+      return await response.json();
     } catch (error) {
       console.log(`Error: ${error}`);
     }
@@ -83,8 +83,7 @@ export class App {
         ids.map(async curId => {
           const url = `https://hacker-news.firebaseio.com/v0/item/${curId}.json`;
           const response = await fetch(url);
-          const data = await response.json();
-          return data;
+          return await response.json();
         })
       );
       return jobs;
@@ -95,7 +94,6 @@ export class App {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('dom is loaded!');
   const myApp = new App();
   myApp.initialize();
 });
