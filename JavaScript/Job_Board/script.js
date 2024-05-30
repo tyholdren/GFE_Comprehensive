@@ -6,31 +6,38 @@ export class App {
     this.jobPostingsContainer = document.getElementById(
       'job-postings-container'
     );
-    this.footerContainer = document.getElementById('footer-container');
     this.jobIds = [];
     this.pageSize = 0;
     this.url = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
+    this.loadingIndicator = null;
   }
 
   async initialize() {
-    const header = document.createElement('h1');
+    const headerEl = document.createElement('h1');
     const loadJobsButton = document.createElement('button');
+    const footerContainer = document.getElementById('footer-container');
     const loadingEl = document.createElement('div');
 
     loadingEl.textContent = 'Loading jobs...';
-    this.appContainer.appendChild(loadingEl);
+    loadingEl.hidden = true;
+    this.loadingIndicator = loadingEl;
+    footerContainer.appendChild(this.loadingIndicator);
 
-    header.textContent = 'Hacker News Jobs Board';
+    this.toggleLoadingIndicator(false);
+
+    headerEl.textContent = 'Hacker News Jobs Board';
     loadJobsButton.textContent = 'Load More Jobs';
 
     loadJobsButton.addEventListener('click', async () => {
+      this.toggleLoadingIndicator(false);
       const postIds = this.jobIds.slice(this.pageSize, this.pageSize + 6);
       this.pageSize += 6;
       const posts = await this.fetchPosts(postIds);
       this.renderPosts(posts);
+      this.toggleLoadingIndicator(true);
     });
 
-    this.jobPostingsContainer.appendChild(header);
+    this.jobPostingsContainer.appendChild(headerEl);
 
     this.jobIds = await this.fetchJobIds();
     const curSelection = this.jobIds.slice(this.pageSize, this.pageSize + 6);
@@ -38,10 +45,14 @@ export class App {
     const posts = await this.fetchPosts(curSelection);
     this.renderPosts(posts);
 
-    this.appContainer.removeChild(loadingEl);
-
+    this.toggleLoadingIndicator(true);
     this.appContainer.appendChild(this.jobPostingsContainer);
-    this.appContainer.appendChild(loadJobsButton);
+    this.appContainer.appendChild(footerContainer);
+    footerContainer.appendChild(loadJobsButton);
+  }
+
+  toggleLoadingIndicator(shouldDisplay) {
+    this.loadingIndicator.hidden = shouldDisplay;
   }
 
   async renderPosts(posts) {
