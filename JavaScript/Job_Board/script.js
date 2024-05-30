@@ -26,9 +26,9 @@ export class App {
     $loadingEl.hidden = false;
     loadingIndicator = $loadingEl;
 
-    this.$appContainer.appendChild(this.$jobPostingsContainer);
-    footerContainer.appendChild(loadingIndicator);
-    this.$appContainer.appendChild(footerContainer);
+    this.$appContainer.append(this.$jobPostingsContainer);
+    footerContainer.append(loadingIndicator);
+    this.$appContainer.append(footerContainer);
 
     $headerEl.textContent = 'Hacker News Jobs Board';
     this.$loadJobsButton.textContent = 'Load More Jobs';
@@ -43,7 +43,7 @@ export class App {
       this.setIsFetchingJobs(false);
     });
 
-    this.$jobPostingsContainer.appendChild($headerEl);
+    this.$jobPostingsContainer.append($headerEl);
 
     this.jobIds = await this.fetchJobIds();
     const curSelection = this.jobIds.slice(this.start, this.end);
@@ -52,7 +52,7 @@ export class App {
     this.renderPosts(posts);
     $loadingEl.hidden = true;
 
-    footerContainer.appendChild(this.$loadJobsButton);
+    footerContainer.append(this.$loadJobsButton);
   }
 
   setIsFetchingJobs(shouldDisplay) {
@@ -65,7 +65,7 @@ export class App {
   async renderPosts(posts) {
     const $fragmentEl = document.createDocumentFragment();
     $fragmentEl.append(...posts.map(post => new Post(post).render()));
-    this.$jobPostingsContainer.appendChild($fragmentEl);
+    this.$jobPostingsContainer.append($fragmentEl);
   }
 
   async fetchJobIds() {
