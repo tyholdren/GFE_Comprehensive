@@ -13,7 +13,7 @@ export class App {
     this.start = this.page * this.PAGE_SIZE;
     this.end = this.start + this.PAGE_SIZE;
 
-    this.URL = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
+    this.JOB_IDS_URL = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
   }
 
   async initialize() {
@@ -70,7 +70,7 @@ export class App {
 
   async fetchJobIds() {
     try {
-      const response = await fetch(this.URL);
+      const response = await fetch(this.JOB_IDS_URL);
       return await response.json();
     } catch (error) {
       console.log(`Error: ${error}`);
