@@ -4,7 +4,7 @@ export class Post {
   }
 
   render() {
-    const { by, id, score, time, title, type, url } = this.data;
+    const { by, time, title, url } = this.data;
 
     const postContainerEl = document.createElement('div');
     let titleEl = null;
@@ -22,12 +22,16 @@ export class Post {
 
     titleEl.textContent = title;
     authorEl.textContent = by;
-    dateEl.textContent = time;
+    dateEl.textContent = this.formatDate(time);
 
     postContainerEl.appendChild(titleEl);
     postContainerEl.appendChild(authorEl);
     postContainerEl.appendChild(dateEl);
 
     return postContainerEl;
+  }
+
+  formatDate(time) {
+    return new Date(time * 1000).toLocaleString();
   }
 }

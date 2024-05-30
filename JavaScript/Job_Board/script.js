@@ -6,42 +6,45 @@ export class App {
     this.jobPostingsContainer = document.getElementById(
       'job-postings-container'
     );
+    this.footerContainer = document.getElementById('footer-container');
     this.jobIds = [];
-    this.limit = 0;
+    this.pageSize = 0;
     this.url = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
   }
 
   async initialize() {
     const header = document.createElement('h1');
-    const footer = document.createElement('div');
-    const buttonContainer = document.getElementById('button-container');
     const loadJobsButton = document.createElement('button');
+    const loadingEl = document.createElement('div');
+
+    loadingEl.textContent = 'Loading jobs...';
+    this.appContainer.appendChild(loadingEl);
 
     header.textContent = 'Hacker News Jobs Board';
     loadJobsButton.textContent = 'Load More Jobs';
 
     loadJobsButton.addEventListener('click', async () => {
-      const postIds = this.jobIds.slice(this.limit, this.limit + 6);
-      this.limit += 6;
+      const postIds = this.jobIds.slice(this.pageSize, this.pageSize + 6);
+      this.pageSize += 6;
       const posts = await this.fetchPosts(postIds);
       this.renderPosts(posts);
     });
 
     this.jobPostingsContainer.appendChild(header);
-    footer.appendChild(loadJobsButton);
-    buttonContainer.appendChild(footer);
 
     this.jobIds = await this.fetchJobIds();
-    const curSelection = this.jobIds.slice(this.limit, this.limit + 6);
-    this.limit += 6;
+    const curSelection = this.jobIds.slice(this.pageSize, this.pageSize + 6);
+    this.pageSize += 6;
     const posts = await this.fetchPosts(curSelection);
     this.renderPosts(posts);
 
+    this.appContainer.removeChild(loadingEl);
+
     this.appContainer.appendChild(this.jobPostingsContainer);
+    this.appContainer.appendChild(loadJobsButton);
   }
 
   async renderPosts(posts) {
-    console.log('rendering posts');
     posts.forEach(post => {
       const jobDetails = new Post(post);
       const jobEl = jobDetails.render();
