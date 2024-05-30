@@ -42,22 +42,26 @@ export class InputComponent {
 
     labelEl.textContent = label;
     labelEl.htmlFor = `${inputType}-${this.id}`;
+    labelEl.classList.add('label');
 
-    if (errorMessage !== null) {
+    if (errorMessage) {
       errorEl.textContent = errorMessage;
       errorEl.classList.add('error-message');
     }
 
-    hintTextEl.textContent = hintText;
-    hintTextEl.classList.add('hint-text');
+    if (hintText) {
+      hintTextEl.textContent = hintText;
+      hintTextEl.classList.add('hint-text');
+    }
 
     inputContainer.appendChild(labelEl);
     inputContainer.appendChild(inputEl);
 
-    if (errorMessage !== null) {
+    if (errorEl) {
       inputContainer.appendChild(errorEl);
+    } else {
+      inputContainer.appendChild(hintTextEl);
     }
-    inputContainer.appendChild(hintTextEl);
 
     return inputContainer;
   }
