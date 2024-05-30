@@ -88,7 +88,7 @@ export class App {
       );
       return jobs;
     } catch (error) {
-      console.log(new Error(error));
+      console.log(`Error: ${error}`);
     }
   }
 }
