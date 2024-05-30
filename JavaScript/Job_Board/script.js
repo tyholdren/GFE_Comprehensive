@@ -3,6 +3,9 @@ import { Post } from './Post.js';
 export class App {
   constructor() {
     this.appContainer = document.getElementById('app-container');
+    this.jobPostingsContainer = document.getElementById(
+      'job-postings-container'
+    );
     this.jobIds = [];
     this.limit = 0;
     this.url = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
@@ -10,22 +13,41 @@ export class App {
 
   async initialize() {
     const header = document.createElement('h1');
+    const footer = document.createElement('div');
+    const buttonContainer = document.getElementById('button-container');
+    const loadJobsButton = document.createElement('button');
+
     header.textContent = 'Hacker News Jobs Board';
-    this.appContainer.append(header);
+    loadJobsButton.textContent = 'Load More Jobs';
+
+    loadJobsButton.addEventListener('click', async () => {
+      const postIds = this.jobIds.slice(this.limit, this.limit + 6);
+      this.limit += 6;
+      const posts = await this.fetchPosts(postIds);
+      this.renderPosts(posts);
+    });
+
+    this.jobPostingsContainer.appendChild(header);
+    footer.appendChild(loadJobsButton);
+    buttonContainer.appendChild(footer);
 
     this.jobIds = await this.fetchJobIds();
     const curSelection = this.jobIds.slice(this.limit, this.limit + 6);
     this.limit += 6;
     const posts = await this.fetchPosts(curSelection);
+    this.renderPosts(posts);
 
+    this.appContainer.appendChild(this.jobPostingsContainer);
+  }
+
+  async renderPosts(posts) {
+    console.log('rendering posts');
     posts.forEach(post => {
       const jobDetails = new Post(post);
       const jobEl = jobDetails.render();
-      this.appContainer.appendChild(jobEl);
+      this.jobPostingsContainer.appendChild(jobEl);
     });
   }
-
-  async renderPosts() {}
 
   async fetchJobIds() {
     try {
@@ -33,7 +55,7 @@ export class App {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.log({ error });
+      console.log(`Error: ${error}`);
     }
   }
 
