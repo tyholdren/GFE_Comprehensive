@@ -11,8 +11,8 @@ export class InputComponent {
       placeholder,
       errorMessage,
       hintText,
-      trailingIcon,
-      leadingIcon,
+      trailingIcon, // not implemented
+      leadingIcon, // not implemented
       isDisabled,
     } = this.data;
 
