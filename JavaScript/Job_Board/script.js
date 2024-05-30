@@ -14,14 +14,17 @@ export class App {
 
   async initialize() {
     const headerEl = document.createElement('h1');
-    const loadJobsButton = document.createElement('button');
-    const footerContainer = document.getElementById('footer-container');
     const loadingEl = document.createElement('div');
+    const loadJobsButton = document.createElement('button');
+    const footerContainer = document.createElement('div');
 
     loadingEl.textContent = 'Loading jobs...';
     loadingEl.hidden = true;
     this.loadingIndicator = loadingEl;
+
+    this.appContainer.appendChild(this.jobPostingsContainer);
     footerContainer.appendChild(this.loadingIndicator);
+    this.appContainer.appendChild(footerContainer);
 
     this.toggleLoadingIndicator(false);
 
@@ -46,8 +49,7 @@ export class App {
     this.renderPosts(posts);
 
     this.toggleLoadingIndicator(true);
-    this.appContainer.appendChild(this.jobPostingsContainer);
-    this.appContainer.appendChild(footerContainer);
+
     footerContainer.appendChild(loadJobsButton);
   }
 
@@ -56,11 +58,13 @@ export class App {
   }
 
   async renderPosts(posts) {
+    const fragment = document.createDocumentFragment();
     posts.forEach(post => {
       const jobDetails = new Post(post);
       const jobEl = jobDetails.render();
-      this.jobPostingsContainer.appendChild(jobEl);
+      fragment.append(jobEl);
     });
+    this.jobPostingsContainer.appendChild(fragment);
   }
 
   async fetchJobIds() {
