@@ -2,7 +2,7 @@ import { InputComponent } from './InputComponent.js';
 
 export class Form {
   constructor() {
-    this.inputContainer = document.getElementById('text-input-container');
+    this.appContainer = document.getElementById('app-container');
   }
 
   initialize() {
@@ -14,7 +14,7 @@ export class Form {
       form.appendChild(inputEl);
     });
 
-    this.inputContainer.appendChild(form);
+    this.appContainer.appendChild(form);
   }
 }
 
@@ -31,34 +31,20 @@ const BASE_DATA = {
   errorMessage: null,
   hintText: 'This is a hint text',
   trailingIcon: true,
+  leadingIcon: null,
+  isDisabled: false,
 };
 
 const DATA = [
+  { ...BASE_DATA },
   {
     ...BASE_DATA,
-    leadingIcon: null,
-    state: 'normal',
+    leadingIcon: true,
   },
-  {
-    ...BASE_DATA,
-    leadingIcon: null,
-    state: 'filled',
-  },
-  {
-    ...BASE_DATA,
-    leadingIcon: null,
-    state: 'focused',
-  },
-  {
-    ...BASE_DATA,
-    leadingIcon: null,
-    state: 'disabled',
-  },
+  { ...BASE_DATA, isDisabled: true },
   {
     ...BASE_DATA,
     hintText: null,
     errorMessage: 'This is an error message',
-    leadingIcon: null,
-    state: 'error',
   },
 ];

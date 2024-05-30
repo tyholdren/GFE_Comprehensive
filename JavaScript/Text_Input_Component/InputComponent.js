@@ -13,34 +13,50 @@ export class InputComponent {
       hintText,
       trailingIcon,
       leadingIcon,
-      state,
+      isDisabled,
     } = this.data;
 
     const inputContainer = document.createElement('div');
     const inputEl = document.createElement('input');
     const labelEl = document.createElement('label');
-    const errorEl = document.createElement('span');
     const hintTextEl = document.createElement('span');
 
     inputContainer.classList.add('input-container');
+
+    let errorEl = null;
+    if (errorMessage) {
+      errorEl = document.createElement('span');
+      errorEl.classList.add('error-message');
+      inputEl.classList.add('input-error');
+    }
 
     inputEl.id = `${inputType}-${this.id}`;
     inputEl.classList.add('input');
     inputEl.type = inputType;
     inputEl.placeholder = placeholder;
 
+    if (isDisabled) {
+      inputEl.disabled = true;
+      inputEl.classList.add('input-disabled');
+    }
+
     labelEl.textContent = label;
     labelEl.htmlFor = `${inputType}-${this.id}`;
 
-    errorEl.textContent = errorMessage;
-    errorEl.classList.add('error-message');
+    if (errorMessage !== null) {
+      errorEl.textContent = errorMessage;
+      errorEl.classList.add('error-message');
+    }
 
     hintTextEl.textContent = hintText;
     hintTextEl.classList.add('hint-text');
 
     inputContainer.appendChild(labelEl);
     inputContainer.appendChild(inputEl);
-    inputContainer.appendChild(errorEl);
+
+    if (errorMessage !== null) {
+      inputContainer.appendChild(errorEl);
+    }
     inputContainer.appendChild(hintTextEl);
 
     return inputContainer;
