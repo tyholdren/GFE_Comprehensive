@@ -21,13 +21,11 @@ export class App {
     const $loadingEl = document.createElement('div');
     const footerContainer = document.createElement('div');
 
-    let loadingIndicator = null;
     $loadingEl.textContent = 'Loading jobs...';
     $loadingEl.hidden = false;
-    loadingIndicator = $loadingEl;
 
     this.$appContainer.append(this.$jobPostingsContainer);
-    footerContainer.append(loadingIndicator);
+    footerContainer.append($loadingEl);
     this.$appContainer.append(footerContainer);
 
     $headerEl.textContent = 'Hacker News Jobs Board';
