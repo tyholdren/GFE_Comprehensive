@@ -1,4 +1,4 @@
-export default class ToDoComponent {
+export class ToDoComponent {
   constructor(data) {
     this.data = data;
     this.isEditing = data.isEditing;
@@ -20,7 +20,7 @@ export default class ToDoComponent {
     $toDoContainer.id = `to-do-${id}`;
     $toDo.textContent = toDo;
     $inputEl.placeholder = toDo;
-    $inputLabel.htmlFor(`to-do-${id}`);
+    $inputLabel.htmlFor = `to-do-${id}`;
     $editButton.textContent = 'edit';
     $deleteButton.textContent = 'delete';
     $cancelButton.textContent = 'cancel';
@@ -37,6 +37,6 @@ export default class ToDoComponent {
     $editingContainer.style.display = !this.isEditing ? 'none' : 'block';
 
     $toDoContainer.append($nonEditingContainer, $editingContainer);
-    return toDoContainer;
+    return $toDoContainer;
   }
 }
