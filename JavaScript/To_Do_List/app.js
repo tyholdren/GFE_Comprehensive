@@ -28,7 +28,7 @@ export default class App {
       // also, map through default to dos on initial page load
       const curTask = new ToDoComponent(task).render();
       console.log({ curTask });
-      this.tasksContainer.append(curTask);
+      this.$tasksContainer.append(curTask);
     });
     $addTaskButton.addEventListener('click', () => {
       // save input value into task taskData
@@ -38,6 +38,7 @@ export default class App {
     });
 
     this.$addTaskContainer.append($addTaskLabel, $addTaskInput, $addTaskButton);
+    console.log(this.$appContainer);
     this.$appContainer.append(this.$addTaskContainer, this.$tasksContainer);
     return this.$appContainer;
   }

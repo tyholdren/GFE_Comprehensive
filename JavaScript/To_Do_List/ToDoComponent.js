@@ -32,9 +32,10 @@ export class ToDoComponent {
 
     $nonEditingContainer.append($inputEl, $cancelButton, $saveButton);
     $editingContainer.append($toDo, $editButton, $deleteButton);
-
     $nonEditingContainer.style.display = this.isEditing ? 'none' : 'block';
     $editingContainer.style.display = !this.isEditing ? 'none' : 'block';
+    // console.log($nonEditingContainer.style.display);
+    // console.log($editingContainer.style.display);
 
     $toDoContainer.append($nonEditingContainer, $editingContainer);
     return $toDoContainer;
