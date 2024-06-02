@@ -28,14 +28,20 @@ export class ToDoComponent {
 
     $editButton.addEventListener('click', () => {
       this.isEditing = !this.isEditing;
-      console.log(this.isEditing);
+      this.render();
     });
     $nonEditingContainer.append($toDo, $editButton, $deleteButton);
     $editingContainer.append($inputEl, $cancelButton, $saveButton);
     $nonEditingContainer.style.display = this.isEditing ? 'none' : 'block';
     $editingContainer.style.display = !this.isEditing ? 'none' : 'block';
     $toDoContainer.append($nonEditingContainer, $editingContainer);
-    console.log($nonEditingContainer.style.display);
+    console.log('non editing:', $nonEditingContainer);
     return $toDoContainer;
+  }
+
+  toggleIsEditing() {
+    // go find task on the DOM and update isEditing flag then re-render
+    // don't just update the state of the display here, that won't reflect
+    // in the UI as expected
   }
 }
