@@ -63,7 +63,6 @@ export default class App {
 
   renderToDos() {
     const fragment = new DocumentFragment();
-
     this.toDos.forEach(task => {
       fragment.append(task.render());
     });

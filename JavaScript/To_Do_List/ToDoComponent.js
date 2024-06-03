@@ -31,6 +31,10 @@ export class ToDoComponent {
       this.toggleHandler(this.id);
     });
 
+    $deleteButton.addEventListener('click', () => {
+      this.deleteTask();
+    });
+
     $cancelButton.addEventListener('click', () => {
       this.toggleHandler(this.id);
     });
@@ -42,5 +46,12 @@ export class ToDoComponent {
     $toDoContainer.append($nonEditingContainer, $editingContainer);
 
     return $toDoContainer;
+  }
+
+  deleteTask() {
+    const childToRemove = document.getElementById(`to-do-${this.id}`);
+    if (childToRemove.parentNode) {
+      childToRemove.parentNode.removeChild(childToRemove);
+    }
   }
 }
