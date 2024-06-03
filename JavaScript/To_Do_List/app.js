@@ -55,25 +55,13 @@ export default class App {
 
   toggleIsEditing(taskId) {
     const taskIndex = this.toDos.findIndex(task => task.id === taskId);
-    if (taskIndex !== -1) {
-      const task = this.toDos[taskIndex];
-      task.isEditing = !task.isEditing;
-
-      // Find the existing DOM element
-      const $existingTaskElement = document.getElementById(`to-do-${task.id}`);
-      if ($existingTaskElement) {
-        // Replace the existing element with the updated one
-        const $newTaskElement = task.render();
-        this.$tasksContainer.replaceChild(
-          $newTaskElement,
-          $existingTaskElement
-        );
-      }
-    }
+    const taskToUpdate = this.toDos[taskIndex];
+    taskToUpdate.isEditing = !taskToUpdate.isEditing;
+    const $existingTask = document.getElementById(`to-do-${taskToUpdate.id}`);
+    $existingTask.replaceWith(taskToUpdate.render());
   }
 
   renderToDos() {
-    this.$tasksContainer.textContent = '';
     const fragment = new DocumentFragment();
 
     this.toDos.forEach(task => {
