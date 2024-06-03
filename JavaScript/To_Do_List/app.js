@@ -50,19 +50,26 @@ export default class App {
   addTask(task) {
     const newTask = new ToDoComponent(task, this.toggleIsEditing.bind(this));
     this.toDos.push(newTask);
-    this.renderToDos();
+    this.$tasksContainer.append(newTask.render());
   }
 
   toggleIsEditing(taskId) {
-    const newTodos = this.toDos.map(task => {
-      if (task.id === taskId) {
-        task.isEditing = !task.isEditing;
-      }
-      return task;
-    });
+    const taskIndex = this.toDos.findIndex(task => task.id === taskId);
+    if (taskIndex !== -1) {
+      const task = this.toDos[taskIndex];
+      task.isEditing = !task.isEditing;
 
-    this.toDos = newTodos;
-    this.renderToDos();
+      // Find the existing DOM element
+      const $existingTaskElement = document.getElementById(`to-do-${task.id}`);
+      if ($existingTaskElement) {
+        // Replace the existing element with the updated one
+        const $newTaskElement = task.render();
+        this.$tasksContainer.replaceChild(
+          $newTaskElement,
+          $existingTaskElement
+        );
+      }
+    }
   }
 
   renderToDos() {
