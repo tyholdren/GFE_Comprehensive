@@ -1,9 +1,10 @@
 export class ToDoComponent {
-  constructor(data, toggleHandler) {
+  constructor(data, toggleHandler, updateTaskHandler) {
     this.id = data.id;
     this.toDo = data.toDo;
     this.isEditing = data.isEditing;
     this.toggleHandler = toggleHandler;
+    this.updateTask = updateTaskHandler;
   }
 
   render() {
@@ -37,6 +38,10 @@ export class ToDoComponent {
 
     $cancelButton.addEventListener('click', () => {
       this.toggleHandler(this.id);
+    });
+
+    $saveButton.addEventListener('click', () => {
+      this.updateTask(this.id, $inputEl.value);
     });
 
     $nonEditingContainer.append($toDo, $editButton, $deleteButton);

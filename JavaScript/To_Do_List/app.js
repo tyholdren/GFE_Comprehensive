@@ -26,7 +26,11 @@ export default class App {
     $addTaskInput.textContent = '';
 
     DEFAULT_TO_DOS.forEach(task => {
-      const newTask = new ToDoComponent(task, this.toggleIsEditing.bind(this));
+      const newTask = new ToDoComponent(
+        task,
+        this.toggleIsEditing.bind(this),
+        this.updateExistingTask.bind(this)
+      );
       this.toDos.push(newTask);
     });
     this.renderToDos();
@@ -48,7 +52,11 @@ export default class App {
   }
 
   addTask(task) {
-    const newTask = new ToDoComponent(task, this.toggleIsEditing.bind(this));
+    const newTask = new ToDoComponent(
+      task,
+      this.toggleIsEditing.bind(this),
+      this.updateExistingTask.bind(this)
+    );
     this.toDos.push(newTask);
     this.$tasksContainer.append(newTask.render());
   }
@@ -59,6 +67,16 @@ export default class App {
     taskToUpdate.isEditing = !taskToUpdate.isEditing;
     const $existingTask = document.getElementById(`to-do-${taskToUpdate.id}`);
     $existingTask.replaceWith(taskToUpdate.render());
+  }
+
+  updateExistingTask(taskId, inputValue) {
+    const index = this.toDos.findIndex(task => task.id === taskId);
+    const taskToUpdate = this.toDos[index];
+    taskToUpdate.toDo = inputValue;
+    const $existingTask = document.getElementById(`to-do-${taskId}`);
+    const $updatedTask = taskToUpdate.render();
+    $existingTask.replaceWith($updatedTask);
+    this.toggleIsEditing(taskId);
   }
 
   renderToDos() {
