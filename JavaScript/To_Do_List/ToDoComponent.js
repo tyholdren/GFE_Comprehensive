@@ -1,11 +1,12 @@
 export class ToDoComponent {
-  constructor(data) {
-    this.data = data;
+  constructor(data, toggleHandler) {
+    this.id = data.id;
+    this.toDo = data.toDo;
     this.isEditing = data.isEditing;
+    this.toggleHandler = toggleHandler;
   }
 
   render() {
-    const { id, toDo } = this.data;
     const $toDoContainer = document.createElement('div');
     const $nonEditingContainer = document.createElement('div');
     const $editingContainer = document.createElement('div');
@@ -17,31 +18,29 @@ export class ToDoComponent {
     const $cancelButton = document.createElement('button');
     const $saveButton = document.createElement('button');
 
-    $toDoContainer.id = `to-do-${id}`;
-    $toDo.textContent = toDo;
-    $inputEl.placeholder = toDo;
-    $inputLabel.htmlFor = `to-do-${id}`;
+    $toDoContainer.id = `to-do-${this.id}`;
+    $toDo.textContent = this.toDo;
+    $inputEl.placeholder = this.toDo;
+    $inputLabel.htmlFor = `to-do-${this.id}`;
     $editButton.textContent = 'edit';
     $deleteButton.textContent = 'delete';
     $cancelButton.textContent = 'cancel';
     $saveButton.textContent = 'save';
 
     $editButton.addEventListener('click', () => {
-      this.isEditing = !this.isEditing;
-      this.render();
+      this.toggleHandler(this.id);
     });
+
+    $cancelButton.addEventListener('click', () => {
+      this.toggleHandler(this.id);
+    });
+
     $nonEditingContainer.append($toDo, $editButton, $deleteButton);
     $editingContainer.append($inputEl, $cancelButton, $saveButton);
     $nonEditingContainer.style.display = this.isEditing ? 'none' : 'block';
     $editingContainer.style.display = !this.isEditing ? 'none' : 'block';
     $toDoContainer.append($nonEditingContainer, $editingContainer);
-    console.log('non editing:', $nonEditingContainer);
-    return $toDoContainer;
-  }
 
-  toggleIsEditing() {
-    // go find task on the DOM and update isEditing flag then re-render
-    // don't just update the state of the display here, that won't reflect
-    // in the UI as expected
+    return $toDoContainer;
   }
 }

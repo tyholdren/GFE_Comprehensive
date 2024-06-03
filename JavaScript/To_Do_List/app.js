@@ -12,6 +12,7 @@ export default class App {
     this.$addTaskContainer = document.createElement('div');
     this.$tasksContainer = document.createElement('div');
     this.toDos = [];
+    this.index = DEFAULT_TO_DOS.length;
   }
 
   initialize() {
@@ -22,25 +23,56 @@ export default class App {
     $addTaskLabel.textContent = 'add a task';
     $addTaskLabel.htmlFor = 'some id';
     $addTaskButton.textContent = 'add task';
+    $addTaskInput.textContent = '';
 
     DEFAULT_TO_DOS.forEach(task => {
-      // save input value into task taskData
-      // also, map through default to dos on initial page load
-      const curTask = new ToDoComponent(task).render();
-      console.log({ curTask });
-      this.$tasksContainer.append(curTask);
+      const newTask = new ToDoComponent(task, this.toggleIsEditing.bind(this));
+      this.toDos.push(newTask);
     });
+    this.renderToDos();
+
     $addTaskButton.addEventListener('click', () => {
-      // save input value into task taskData
-      // also, map through default to dos on initial page load
-      const curTask = new ToDoComponent(taskData).render();
-      this.tasksContainer.append(curTask);
+      const newTask = {
+        id: this.index,
+        toDo: $addTaskInput.value,
+        isEditing: false,
+      };
+      this.index += 1;
+      this.addTask(newTask);
     });
 
     this.$addTaskContainer.append($addTaskLabel, $addTaskInput, $addTaskButton);
-    console.log(this.$appContainer);
+
     this.$appContainer.append(this.$addTaskContainer, this.$tasksContainer);
     return this.$appContainer;
+  }
+
+  addTask(task) {
+    const newTask = new ToDoComponent(task, this.toggleIsEditing.bind(this));
+    this.toDos.push(newTask);
+    this.renderToDos();
+  }
+
+  toggleIsEditing(taskId) {
+    const newTodos = this.toDos.map(task => {
+      if (task.id === taskId) {
+        task.isEditing = !task.isEditing;
+      }
+      return task;
+    });
+
+    this.toDos = newTodos;
+    this.renderToDos();
+  }
+
+  renderToDos() {
+    this.$tasksContainer.textContent = '';
+    const fragment = new DocumentFragment();
+
+    this.toDos.forEach(task => {
+      fragment.append(task.render());
+    });
+    this.$tasksContainer.append(fragment);
   }
 }
 
