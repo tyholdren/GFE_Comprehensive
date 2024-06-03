@@ -46,26 +46,10 @@ export default class App {
 
     this.$tasksContainer.addEventListener('click', event => {
       event.preventDefault();
+      const buttonId = event.target.id;
       const parentNodeId = event.target.parentNode.parentNode.id;
-
-      if (event.target.textContent === 'delete') {
-        const taskToDelete = event.target.parentNode;
-        if (taskToDelete.parentNode) {
-          taskToDelete.parentNode.removeChild(taskToDelete);
-        }
-      } else if ((event.target.textContext = 'save')) {
-        // get id
-        // get input value
-        this.updateTask();
-      }
-      // give the delete button an id of "delete-button"
-      else if (event.target.textContent === 'edit') {
-        const taskId = parseInt(parentNodeId[parentNodeId.length - 1]);
-        this.toggleIsEditing(taskId);
-      } else if (event.target.textContent === 'cancel') {
-        const taskId = parseInt(parentNodeId[parentNodeId.length - 1]);
-        this.toggleIsEditing(taskId);
-      }
+      const taskToDelete = event.target.parentNode;
+      this.handleTasksContainerClick(buttonId, parentNodeId, taskToDelete);
     });
 
     this.$addTaskContainer.append($addTaskLabel, $addTaskInput, $addTaskButton);
@@ -73,14 +57,34 @@ export default class App {
     return this.$appContainer;
   }
 
+  handleTasksContainerClick(buttonId, parentNodeId, taskToDelete) {
+    const taskId = parseInt(parentNodeId[parentNodeId.length - 1]);
+
+    switch (buttonId) {
+      case buttonId === 'delete-button':
+        if (taskToDelete.parentNode) {
+          taskToDelete.parentNode.removeChild(taskToDelete);
+        }
+        break;
+      case 'save-button':
+        this.updateExistingTask(taskId);
+        break;
+      case 'edit-button':
+      case 'cancel-button':
+        this.toggleIsEditing(taskId);
+        break;
+      default:
+        return;
+    }
+  }
+
   addTask(task) {
-    const newTask = new ToDoComponent(task, this.updateExistingTask);
+    const newTask = new ToDoComponent(task);
     this.toDos.push(newTask);
     this.$tasksContainer.append(newTask.render());
   }
 
   toggleIsEditing = taskId => {
-    console.log({ taskId });
     const taskIndex = this.toDos.findIndex(task => task.id === taskId);
     console.log({ taskIndex });
     const taskToUpdate = this.toDos[taskIndex];

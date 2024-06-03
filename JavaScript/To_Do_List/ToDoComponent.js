@@ -1,5 +1,5 @@
 export class ToDoComponent {
-  constructor(data, updateTaskHandler) {
+  constructor(data) {
     this.id = data.id;
     this.toDo = data.toDo;
     this.isEditing = data.isEditing;
@@ -22,13 +22,17 @@ export class ToDoComponent {
     $inputEl.placeholder = this.toDo;
     $inputLabel.htmlFor = `to-do-${this.id}`;
     $editButton.textContent = 'edit';
+    $editButton.id = 'edit-button';
     $deleteButton.textContent = 'delete';
+    $deleteButton.id = 'delete-button';
     $cancelButton.textContent = 'cancel';
+    $cancelButton.id = 'cancel-button';
     $saveButton.textContent = 'save';
+    $saveButton.id = 'save-button';
 
-    $saveButton.addEventListener('click', () => {
-      this.updateTask(this.id, $inputEl.value);
-    });
+    // $saveButton.addEventListener('click', () => {
+    //   this.updateTask(this.id, $inputEl.value);
+    // });
 
     $nonEditingContainer.append($toDo, $editButton, $deleteButton);
     $editingContainer.append($inputEl, $cancelButton, $saveButton);
