@@ -1,10 +1,8 @@
 export class ToDoComponent {
-  constructor(data, toggleHandler, updateTaskHandler) {
+  constructor(data, updateTaskHandler) {
     this.id = data.id;
     this.toDo = data.toDo;
     this.isEditing = data.isEditing;
-    this.toggleHandler = toggleHandler;
-    this.updateTask = updateTaskHandler;
   }
 
   render() {
@@ -27,14 +25,6 @@ export class ToDoComponent {
     $deleteButton.textContent = 'delete';
     $cancelButton.textContent = 'cancel';
     $saveButton.textContent = 'save';
-
-    $editButton.addEventListener('click', () => {
-      this.toggleHandler(this.id);
-    });
-
-    $cancelButton.addEventListener('click', () => {
-      this.toggleHandler(this.id);
-    });
 
     $saveButton.addEventListener('click', () => {
       this.updateTask(this.id, $inputEl.value);
