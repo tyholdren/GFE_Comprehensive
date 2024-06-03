@@ -36,17 +36,29 @@ export default class App {
     this.renderToDos();
 
     $addTaskButton.addEventListener('click', () => {
-      const newTask = {
-        id: this.index,
-        toDo: $addTaskInput.value,
-        isEditing: false,
-      };
-      this.index += 1;
-      this.addTask(newTask);
+      if ($addTaskInput.value) {
+        const newTask = {
+          id: this.index,
+          toDo: $addTaskInput.value,
+          isEditing: false,
+        };
+        this.index += 1;
+        $addTaskInput.value = '';
+        this.addTask(newTask);
+      }
+    });
+
+    this.$tasksContainer.addEventListener('click', event => {
+      event.preventDefault();
+      if (event.target.textContent === 'delete') {
+        const taskToDelete = event.target.parentNode;
+        if (taskToDelete.parentNode) {
+          taskToDelete.parentNode.removeChild(taskToDelete);
+        }
+      }
     });
 
     this.$addTaskContainer.append($addTaskLabel, $addTaskInput, $addTaskButton);
-
     this.$appContainer.append(this.$addTaskContainer, this.$tasksContainer);
     return this.$appContainer;
   }
@@ -74,9 +86,15 @@ export default class App {
     const taskToUpdate = this.toDos[index];
     taskToUpdate.toDo = inputValue;
     const $existingTask = document.getElementById(`to-do-${taskId}`);
-    const $updatedTask = taskToUpdate.render();
-    $existingTask.replaceWith($updatedTask);
+    $existingTask.replaceWith(taskToUpdate.render());
     this.toggleIsEditing(taskId);
+  }
+
+  deleteTask() {
+    const childToRemove = document.getElementById(`to-do-${this.id}`);
+    if (childToRemove.parentNode) {
+      childToRemove.parentNode.removeChild(childToRemove);
+    }
   }
 
   renderToDos() {
