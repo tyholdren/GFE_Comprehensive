@@ -67,7 +67,10 @@ export default class App {
         }
         break;
       case 'save-button':
-        this.updateExistingTask(taskId);
+        const inputValue = document.getElementById(
+          `to-do-input-${taskId}`
+        ).value;
+        this.updateExistingTask(taskId, inputValue);
         break;
       case 'edit-button':
       case 'cancel-button':

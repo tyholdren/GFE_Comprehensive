@@ -20,6 +20,7 @@ export class ToDoComponent {
     $toDoContainer.id = `to-do-${this.id}`;
     $toDo.textContent = this.toDo;
     $inputEl.placeholder = this.toDo;
+    $inputEl.id = `to-do-input-${this.id}`;
     $inputLabel.htmlFor = `to-do-${this.id}`;
     $editButton.textContent = 'edit';
     $editButton.id = 'edit-button';
@@ -29,10 +30,6 @@ export class ToDoComponent {
     $cancelButton.id = 'cancel-button';
     $saveButton.textContent = 'save';
     $saveButton.id = 'save-button';
-
-    // $saveButton.addEventListener('click', () => {
-    //   this.updateTask(this.id, $inputEl.value);
-    // });
 
     $nonEditingContainer.append($toDo, $editButton, $deleteButton);
     $editingContainer.append($inputEl, $cancelButton, $saveButton);
