@@ -1,5 +1,5 @@
 import { Cell } from './Cell.js';
-export default class App {
+export class App {
   constructor() {
     this.$appContainer = document.getElementById('app-container');
     this.config = [
@@ -23,7 +23,7 @@ export default class App {
   }
 }
 
-document.addEventListener('click', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const myApp = new App();
   myApp.initialize();
 });

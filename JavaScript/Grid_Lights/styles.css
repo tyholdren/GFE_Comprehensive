@@ -1,3 +1,18 @@
 * {
   box-sizing: border-box;
 }
+
+.app-container {
+  --spacing: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 0fr);
+  gap: var(--spacing);
+}
+
+.cell {
+  --dimension: 100px;
+  border: 1px solid black;
+  width: var(--dimension);
+  height: var(--dimension);
+  color: green;
+}

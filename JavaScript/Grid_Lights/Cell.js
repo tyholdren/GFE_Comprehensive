@@ -5,6 +5,8 @@ export class Cell {
 
   render() {
     const $button = document.createElement('button');
+    $button.classList.add('cell');
+    $button.textContent = 'button';
     return $button;
   }
 }
