@@ -16,3 +16,7 @@
   height: var(--dimension);
   color: green;
 }
+
+.active-cell {
+  background-color: green;
+}
