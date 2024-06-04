@@ -20,10 +20,11 @@ export default class App {
     const $addTaskInput = document.createElement('input');
     const $addTaskButton = document.createElement('button');
 
-    $addTaskLabel.textContent = 'add a task';
-    $addTaskLabel.htmlFor = 'some id';
-    $addTaskButton.textContent = 'add task';
+    $addTaskInput.id = 'add-task-input';
     $addTaskInput.textContent = '';
+    $addTaskInput.placeholder = 'add a task';
+    $addTaskLabel.htmlFor = 'add-task-input';
+    $addTaskButton.textContent = 'add task';
 
     DEFAULT_TO_DOS.forEach(task => {
       const newTask = new ToDoComponent(task, this.updateExistingTask);
@@ -89,7 +90,6 @@ export default class App {
 
   toggleIsEditing = taskId => {
     const taskIndex = this.toDos.findIndex(task => task.id === taskId);
-    console.log({ taskIndex });
     const taskToUpdate = this.toDos[taskIndex];
     taskToUpdate.isEditing = !taskToUpdate.isEditing;
     const $existingTask = document.getElementById(`to-do-${taskToUpdate.id}`);
