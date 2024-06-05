@@ -34,9 +34,23 @@ export class App {
   }
 
   activateCell(cell) {
-    this.activatedCells.push(cell);
+    this.activatedCells.push(cell.id);
     cell.isDisabled = true;
     cell.classList.add('active-cell');
+  }
+
+  checkToDeactive() {
+    if (this.acitvatedCells.length === 9) {
+      this.isDeactivating = true;
+      this.deactivateCells();
+    }
+  }
+
+  deactivateCells() {
+    this.activatedCells = this.activatedCells.slice(
+      0,
+      this.activatedCells.length - 1
+    );
   }
 }
 
