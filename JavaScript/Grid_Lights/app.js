@@ -1,4 +1,5 @@
 import { Cell } from './Cell.js';
+
 export class App {
   constructor() {
     this.$appContainer = document.getElementById('app-container');
@@ -8,7 +9,8 @@ export class App {
       [1, 1, 1],
     ];
     this.activatedCells = [];
-    this.isDeactivating = false;
+    this.intervalId = null;
+    this.limit = this.config.flat().filter(Boolean).length;
   }
 
   initialize() {
@@ -22,6 +24,7 @@ export class App {
         return document.createElement('span');
       }
     });
+
     fragment.append(...grid);
     this.$appContainer.append(fragment);
     this.$appContainer.addEventListener('click', event => {
@@ -37,20 +40,28 @@ export class App {
     this.activatedCells.push(cell.id);
     cell.isDisabled = true;
     cell.classList.add('active-cell');
+    this.checkToDeactivate();
   }
 
-  checkToDeactive() {
-    if (this.acitvatedCells.length === 9) {
-      this.isDeactivating = true;
+  checkToDeactivate() {
+    if (this.activatedCells.length === this.limit) {
       this.deactivateCells();
     }
   }
 
   deactivateCells() {
-    this.activatedCells = this.activatedCells.slice(
-      0,
-      this.activatedCells.length - 1
-    );
+    this.intervalId = setInterval(() => {
+      let lastCellId = this.activatedCells[this.activatedCells.length - 1];
+      const $lastCell = document.getElementById(lastCellId);
+      $lastCell.classList.remove('active-cell');
+      this.activatedCells = this.activatedCells.slice(
+        0,
+        this.activatedCells.length - 1
+      );
+      if (this.activatedCells.length === 0) {
+        return clearInterval(this.intervalId);
+      }
+    }, 500);
   }
 }
 
