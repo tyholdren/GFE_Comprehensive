@@ -9,7 +9,7 @@ export class Cell {
     $btn.id = `cell-${this.id}`;
     $btn.value = this.value;
     $btn.classList.add('cell');
-    $btn.textContent = this.isActive ? this.value : 'X';
+    $btn.textContent = 'X';
     return $btn;
   }
 }

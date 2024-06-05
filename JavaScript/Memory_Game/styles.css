@@ -6,3 +6,9 @@
   display: grid;
   gap: 10px;
 }
+
+.blank-cell {
+  border: none;
+  color: white;
+  background-color: white;
+}
