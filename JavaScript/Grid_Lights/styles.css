@@ -3,10 +3,8 @@
 }
 
 .app-container {
-  --spacing: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 0fr);
-  gap: var(--spacing);
+  gap: 10px;
 }
 
 .cell {

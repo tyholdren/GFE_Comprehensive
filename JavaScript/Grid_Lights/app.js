@@ -3,17 +3,20 @@ import { Cell } from './Cell.js';
 export class App {
   constructor() {
     this.$appContainer = document.getElementById('app-container');
+
     this.config = [
       [1, 1, 1],
       [1, 0, 1],
       [1, 1, 1],
     ];
+
     this.activatedCells = [];
     this.intervalId = null;
     this.limit = this.config.flat().filter(Boolean).length;
   }
 
   initialize() {
+    this.$appContainer.style.gridTemplateColumns = `repeat(${this.config[0].length}, 0fr)`;
     const fragment = document.createDocumentFragment();
     const grid = this.config.flat().map((data, index) => {
       if (data) {
@@ -28,7 +31,7 @@ export class App {
     fragment.append(...grid);
     this.$appContainer.append(fragment);
     this.$appContainer.addEventListener('click', event => {
-      if (event.target.textContent === 'cell') {
+      if (event.target.tagName === 'BUTTON') {
         const activeCell = event.target;
         this.activateCell(activeCell);
       }
@@ -40,10 +43,6 @@ export class App {
     this.activatedCells.push(cell.id);
     cell.isDisabled = true;
     cell.classList.add('active-cell');
-    this.checkToDeactivate();
-  }
-
-  checkToDeactivate() {
     if (this.activatedCells.length === this.limit) {
       this.deactivateCells();
     }
@@ -51,9 +50,10 @@ export class App {
 
   deactivateCells() {
     this.intervalId = setInterval(() => {
-      let lastCellId = this.activatedCells[this.activatedCells.length - 1];
-      const $lastCell = document.getElementById(lastCellId);
-      $lastCell.classList.remove('active-cell');
+      const deactivatedCell =
+        this.activatedCells[this.activatedCells.length - 1];
+      const $deactivatedCell = document.getElementById(deactivatedCell);
+      $deactivatedCell.classList.remove('active-cell');
       this.activatedCells = this.activatedCells.slice(
         0,
         this.activatedCells.length - 1
