@@ -1,3 +1,8 @@
+import {
+  DATA_CONTAINER,
+  DEFAULT_LEFT_DATA,
+  DEFAULT_RIGHT_DATA,
+} from './constants.js';
 import { Section } from './Section.js';
 import { SectionStatus } from './SectionStatus.js';
 
@@ -10,8 +15,6 @@ export class App {
     this.$leftButton.textContent = 'send left';
     this.$rightButton = document.createElement('button');
     this.$rightButton.textContent = 'send right';
-    this.initialLeftData = ['html', 'javascript', 'css', 'typescript'];
-    this.initialRightData = ['react', 'angular', 'vue', 'svelte'];
     this.toSendLeft = [];
     this.toSendRight = [];
   }
@@ -26,8 +29,8 @@ export class App {
       this.transferData(
         this.toSendRight,
         this.toSendLeft,
-        'left-section-data-container',
-        'right-section-data-container'
+        DATA_CONTAINER.LEFT,
+        DATA_CONTAINER.RIGHT
       );
     });
 
@@ -35,8 +38,8 @@ export class App {
       this.transferData(
         this.toSendLeft,
         this.toSendRight,
-        'right-section-data-container',
-        'left-section-data-container'
+        DATA_CONTAINER.RIGHT,
+        DATA_CONTAINER.LEFT
       );
     });
 
@@ -44,7 +47,7 @@ export class App {
     $leftInput.id = 'left-input-container';
     const $leftStatus = new SectionStatus(this.toSendRight, 'left').render();
     const $leftData = new Section(
-      this.initialLeftData,
+      Object.values(DEFAULT_LEFT_DATA),
       'left-section'
     ).render();
 
@@ -55,7 +58,7 @@ export class App {
     $rightInput.id = 'right-input-container';
     const $rightStatus = new SectionStatus(this.toSendLeft, 'right').render();
     const $rightData = new Section(
-      this.initialRightData,
+      Object.values(DEFAULT_RIGHT_DATA),
       'right-section'
     ).render();
 
@@ -63,7 +66,7 @@ export class App {
     $rightSection.append($rightInput, $rightStatus, $rightData);
 
     $leftSection.addEventListener('click', event => {
-      if (event.target.id && event.target.tagName !== 'INPUT') {
+      if (event.target.id && event.target.id !== 'left-input-container') {
         const parentNodeId = event.target.parentNode.id;
         this.toggleToTransfer(parentNodeId, 'left-section');
         this.updateStatus(this.toSendRight, 'left');
@@ -71,7 +74,7 @@ export class App {
     });
 
     $rightSection.addEventListener('click', event => {
-      if (event.target.id) {
+      if (event.target.id && event.target.id !== 'right-input-container') {
         const parentNodeId = event.target.parentNode.id;
         this.toggleToTransfer(parentNodeId, 'right-section');
         this.updateStatus(this.toSendLeft, 'right');
@@ -88,6 +91,7 @@ export class App {
   }
 
   updateStatus(transferContainer, section) {
+    console.log('updating');
     const statusNode = document.getElementById(
       `${section}-section-status-label`
     );
