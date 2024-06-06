@@ -21,7 +21,21 @@ export class App {
     $sendRightBtn.textContent = 'send right';
 
     $sendRightBtn.addEventListener('click', () => {
-      this.handleSendRight();
+      this.transferData(
+        this.toSendRight,
+        this.toSendLeft,
+        'left-section-data-container',
+        'right-section-data-container'
+      );
+    });
+
+    $sendLeftBtn.addEventListener('click', () => {
+      this.transferData(
+        this.toSendLeft,
+        this.toSendRight,
+        'right-section-data-container',
+        'left-section-data-container'
+      );
     });
 
     const $leftSection = new Section(
@@ -36,13 +50,13 @@ export class App {
     $leftSection.addEventListener('click', event => {
       if (event.target.id) {
         const parentNodeId = event.target.parentNode.id;
-        // console.log({ parentNodeId });
         this.toggleToTransfer(parentNodeId, 'left-section');
       }
     });
 
     $rightSection.addEventListener('click', event => {
       if (event.target.id) {
+        const parentNodeId = event.target.parentNode.id;
         this.toggleToTransfer(parentNodeId, 'right-section');
       }
     });
@@ -56,11 +70,16 @@ export class App {
     return this.$appContainer;
   }
 
-  handleSendRight() {
+  transferData(
+    transferContainer,
+    oppositeTransferContainer,
+    curSectionContainer,
+    transferToContainer
+  ) {
     const removedChildren = [];
-    if (this.toSendRight.length) {
-      const parent = document.getElementById('left-section-data-container');
-      this.toSendRight.forEach(childId => {
+    if (transferContainer.length) {
+      const parent = document.getElementById(curSectionContainer);
+      transferContainer.forEach(childId => {
         const childNode = document.getElementById(childId);
         const removedChild = parent.removeChild(childNode);
         removedChildren.push(removedChild);
@@ -68,12 +87,10 @@ export class App {
     }
     const fragment = document.createDocumentFragment();
     fragment.append(...removedChildren);
-    this.toSendLeft = [this.toSendLeft, ...removedChildren];
-    const rightDataContainer = document.getElementById(
-      'right-section-data-container'
-    );
-    rightDataContainer.append(fragment);
-    this.toSendRight = [];
+    oppositeTransferContainer = [oppositeTransferContainer, ...removedChildren];
+    const oppositeContainer = document.getElementById(transferToContainer);
+    oppositeContainer.append(fragment);
+    transferContainer = [];
   }
 
   toggleToTransfer(targetId, section) {
