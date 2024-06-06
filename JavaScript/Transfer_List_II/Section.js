@@ -1,6 +1,7 @@
 export class Section {
-  constructor(data) {
+  constructor(data, section) {
     this.data = data;
+    this.section = section;
   }
 
   render() {
@@ -15,6 +16,8 @@ export class Section {
     const $containerState = document.createElement('input');
     const $dataContainer = document.createElement('div');
 
+    $sectionContainer.id = this.section;
+
     $inputLabel.htmlFor = 'left-input';
     $inputLabel.textContent = '0/4 selected"';
 
@@ -27,10 +30,14 @@ export class Section {
     $containerState.checked = false;
     $containerState.name = '0/4 selected';
     $containerStateWrapper.append($containerState, $containerStateLabel);
+    $dataContainer.id = `${this.section}-data-container`;
 
     this.data.forEach(el => {
       const $dataWrapper = document.createElement('div');
       const $input = document.createElement('input');
+
+      $dataWrapper.id = `${el}-checkbox`;
+
       $input.type = 'checkbox';
       $input.checked = false;
       $input.name = el;

@@ -10,6 +10,8 @@ export class App {
     this.$rightButton.textContent = 'send right';
     this.initialLeftData = ['html', 'javascript', 'css', 'typescript'];
     this.initialRightData = ['react', 'angular', 'vue', 'svelte'];
+    this.toSendLeft = [];
+    this.toSendRight = [];
   }
 
   initialize() {
@@ -18,8 +20,32 @@ export class App {
     $sendLeftBtn.textContent = 'send left';
     $sendRightBtn.textContent = 'send right';
 
-    const $leftSection = new Section(this.initialLeftData).render();
-    const $rightSection = new Section(this.initialRightData).render();
+    $sendRightBtn.addEventListener('click', () => {
+      this.handleSendRight();
+    });
+
+    const $leftSection = new Section(
+      this.initialLeftData,
+      'left-section'
+    ).render();
+    const $rightSection = new Section(
+      this.initialRightData,
+      'right-section'
+    ).render();
+
+    $leftSection.addEventListener('click', event => {
+      if (event.target.id) {
+        const parentNodeId = event.target.parentNode.id;
+        console.log({ parentNodeId });
+        this.toggleToTransfer(parentNodeId, 'left-section');
+      }
+    });
+
+    $rightSection.addEventListener('click', event => {
+      if (event.target.id) {
+        this.toggleToTransfer(parentNodeId, 'right-section');
+      }
+    });
 
     $leftSection.classList.add('section');
     this.$middleSection.classList.add('section');
@@ -28,6 +54,44 @@ export class App {
     this.$middleSection.append($sendLeftBtn, $sendRightBtn);
     this.$appContainer.append($leftSection, this.$middleSection, $rightSection);
     return this.$appContainer;
+  }
+
+  handleSendRight() {
+    const removedChildren = [];
+    if (this.toSendRight.length) {
+      const parent = document.getElementById('left-section-data-container');
+      this.toSendRight.forEach(childId => {
+        const childNode = document.getElementById(childId);
+        const removedChild = parent.removeChild(childNode);
+        removedChildren.push(removedChild);
+      });
+    }
+    const fragment = document.createDocumentFragment();
+    fragment.append(...removedChildren);
+    this.toSendLeft = [this.toSendLeft, ...removedChildren];
+    const rightDataContainer = document.getElementById(
+      'right-section-data-container'
+    );
+    rightDataContainer.append(fragment);
+    this.toSendRight = [];
+  }
+
+  toggleToTransfer(targetId, section) {
+    if (section === 'left-section') {
+      if (this.toSendRight.includes(targetId)) {
+        this.toSendRight = this.toSendRight.filter(id => id !== targetId);
+      } else {
+        this.toSendRight.push(targetId);
+      }
+    } else {
+      if (this.toSendLeft.includes(targetId)) {
+        this.toSendLeft = this.toSendLeft.filter(id => id !== targetId);
+      } else {
+        this.toSendLeft.push(targetId);
+      }
+    }
+    // console.log(this.toSendRight);
+    // console.log(this.toSendLeft);
   }
 }
 
