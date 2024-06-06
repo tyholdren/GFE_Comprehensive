@@ -36,7 +36,7 @@ export class App {
     $leftSection.addEventListener('click', event => {
       if (event.target.id) {
         const parentNodeId = event.target.parentNode.id;
-        console.log({ parentNodeId });
+        // console.log({ parentNodeId });
         this.toggleToTransfer(parentNodeId, 'left-section');
       }
     });
@@ -77,21 +77,17 @@ export class App {
   }
 
   toggleToTransfer(targetId, section) {
-    if (section === 'left-section') {
-      if (this.toSendRight.includes(targetId)) {
-        this.toSendRight = this.toSendRight.filter(id => id !== targetId);
-      } else {
-        this.toSendRight.push(targetId);
-      }
+    const sectionMap = {
+      'left-section': 'toSendRight',
+      'right-section': 'toSendLeft',
+    };
+
+    const targetArray = this[sectionMap[section]];
+    if (targetArray.includes(targetId)) {
+      this[sectionMap[section]] = targetArray.filter(id => id !== targetId);
     } else {
-      if (this.toSendLeft.includes(targetId)) {
-        this.toSendLeft = this.toSendLeft.filter(id => id !== targetId);
-      } else {
-        this.toSendLeft.push(targetId);
-      }
+      this[sectionMap[section]].push(targetId);
     }
-    // console.log(this.toSendRight);
-    // console.log(this.toSendLeft);
   }
 }
 
