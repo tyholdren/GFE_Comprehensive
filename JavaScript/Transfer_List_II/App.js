@@ -77,9 +77,11 @@ export class App {
     transferToContainer
   ) {
     const removedChildren = [];
+
     if (transferContainer.length) {
       const parent = document.getElementById(curSectionContainer);
       transferContainer.forEach(childId => {
+        oppositeTransferContainer.push(childId);
         const childNode = document.getElementById(childId);
         const removedChild = parent.removeChild(childNode);
         removedChildren.push(removedChild);
@@ -87,10 +89,9 @@ export class App {
     }
     const fragment = document.createDocumentFragment();
     fragment.append(...removedChildren);
-    oppositeTransferContainer = [oppositeTransferContainer, ...removedChildren];
     const oppositeContainer = document.getElementById(transferToContainer);
     oppositeContainer.append(fragment);
-    transferContainer = [];
+    transferContainer.length = 0;
   }
 
   toggleToTransfer(targetId, section) {
