@@ -1,4 +1,5 @@
 import { Section } from './Section.js';
+import { SectionStatus } from './SectionStatus.js';
 export class App {
   constructor() {
     this.$appContainer = document.getElementById('app-container');
@@ -38,19 +39,29 @@ export class App {
       );
     });
 
-    const $leftSection = new Section(
+    const $leftStatus = new SectionStatus(this.toSendRight, 'left').render();
+    const $leftData = new Section(
       this.initialLeftData,
       'left-section'
     ).render();
-    const $rightSection = new Section(
+
+    const $leftSection = document.createElement('div');
+    $leftSection.append($leftStatus, $leftData);
+
+    const $rightStatus = new SectionStatus(this.toSendLeft, 'right').render();
+    const $rightData = new Section(
       this.initialRightData,
       'right-section'
     ).render();
+
+    const $rightSection = document.createElement('div');
+    $rightSection.append($rightStatus, $rightData);
 
     $leftSection.addEventListener('click', event => {
       if (event.target.id) {
         const parentNodeId = event.target.parentNode.id;
         this.toggleToTransfer(parentNodeId, 'left-section');
+        this.updateStatus(this.toSendRight, 'left');
       }
     });
 
@@ -58,6 +69,7 @@ export class App {
       if (event.target.id) {
         const parentNodeId = event.target.parentNode.id;
         this.toggleToTransfer(parentNodeId, 'right-section');
+        this.updateStatus(this.toSendLeft, 'right');
       }
     });
 
@@ -68,6 +80,13 @@ export class App {
     this.$middleSection.append($sendLeftBtn, $sendRightBtn);
     this.$appContainer.append($leftSection, this.$middleSection, $rightSection);
     return this.$appContainer;
+  }
+
+  updateStatus(transferContainer, section) {
+    const statusNode = document.getElementById(
+      `${section}-section-status-label`
+    );
+    statusNode.textContent = `${transferContainer.length}/4 Selected`;
   }
 
   transferData(
