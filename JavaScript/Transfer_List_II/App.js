@@ -1,5 +1,6 @@
 import { Section } from './Section.js';
 import { SectionStatus } from './SectionStatus.js';
+
 export class App {
   constructor() {
     this.$appContainer = document.getElementById('app-container');
@@ -39,6 +40,8 @@ export class App {
       );
     });
 
+    const $leftInput = document.createElement('input');
+    $leftInput.id = 'left-input-container';
     const $leftStatus = new SectionStatus(this.toSendRight, 'left').render();
     const $leftData = new Section(
       this.initialLeftData,
@@ -46,8 +49,10 @@ export class App {
     ).render();
 
     const $leftSection = document.createElement('div');
-    $leftSection.append($leftStatus, $leftData);
+    $leftSection.append($leftInput, $leftStatus, $leftData);
 
+    const $rightInput = document.createElement('input');
+    $rightInput.id = 'right-input-container';
     const $rightStatus = new SectionStatus(this.toSendLeft, 'right').render();
     const $rightData = new Section(
       this.initialRightData,
@@ -55,10 +60,10 @@ export class App {
     ).render();
 
     const $rightSection = document.createElement('div');
-    $rightSection.append($rightStatus, $rightData);
+    $rightSection.append($rightInput, $rightStatus, $rightData);
 
     $leftSection.addEventListener('click', event => {
-      if (event.target.id) {
+      if (event.target.id && event.target.tagName !== 'INPUT') {
         const parentNodeId = event.target.parentNode.id;
         this.toggleToTransfer(parentNodeId, 'left-section');
         this.updateStatus(this.toSendRight, 'left');

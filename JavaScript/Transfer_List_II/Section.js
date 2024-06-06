@@ -6,21 +6,9 @@ export class Section {
 
   render() {
     const $sectionContainer = document.createElement('div');
-
-    // const $inputContainer = document.createElement('div');
-    // const $inputLabel = document.createElement('label');
-    // const $inputEl = document.createElement('input');
-
     const $dataContainer = document.createElement('div');
 
     $sectionContainer.id = this.section;
-
-    // $inputLabel.htmlFor = 'left-input';
-    // $inputLabel.textContent = `${this.transferArray.length}/4 selected`;
-
-    // $inputEl.id = 'left-input';
-    // $inputEl.type = 'text';
-
     $dataContainer.id = `${this.section}-data-container`;
 
     this.data.forEach(el => {
