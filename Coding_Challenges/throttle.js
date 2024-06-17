@@ -5,10 +5,11 @@ function throttle(fn, duration) {
   return function (...args) {
     if (!isThrottled) {
       isThrottled = true;
+      func.apply(this, args);
 
       timeoutId = setTimeout(() => {
         isThrottled = false;
-        return fn.apply(this, args);
+        clearTimeout(timeoutId);
       }, duration);
     }
   };
