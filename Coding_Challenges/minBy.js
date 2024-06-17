@@ -14,6 +14,5 @@ export default function minBy(array, iteratee) {
       minResult = curResult;
     }
   }
-
   return minValue;
 }

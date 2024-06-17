@@ -8,3 +8,4 @@ export default function promiseReject(reason) {
     reject(reason);
   });
 }
+console.log('tyler');
