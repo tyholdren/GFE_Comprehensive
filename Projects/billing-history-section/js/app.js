@@ -7,7 +7,7 @@ class App {
 
   async initialize() {
     const billingHistory = await this.fetchData();
-    const table = new Table(billingHistory.data);
+    const table = new Table(billingHistory);
     const $table = table.render();
     this.appContainer.append($table);
   }
@@ -16,9 +16,8 @@ class App {
     const response = await fetch(
       'https://www.greatfrontend.com/api/projects/challenges/account/billing/history'
     );
-    const billingHistory = await response.json();
-    console.log(billingHistory.data);
-    return billingHistory;
+    const { data } = await response.json();
+    return data;
   }
 }
 

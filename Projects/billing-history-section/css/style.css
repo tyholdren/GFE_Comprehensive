@@ -16,3 +16,20 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.table {
+  border: 1px solid black;
+}
+
+.table__row {
+  border-top: 1px solid black;
+  padding: 0.5rem 0rem;
+}
+
+.table__row--header {
+  background-color: yellow;
+}
+
+.table__row--content {
+  background-color: green;
+}

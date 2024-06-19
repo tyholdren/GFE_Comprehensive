@@ -10,16 +10,18 @@ export class Table {
     const $tableContainer = document.createElement('div');
     const $tableContentContainer = document.createElement('div');
     const $tableHeader = new TableRow(undefined, ROW_TYPE.HEADER).render();
+    $tableHeader.classList.add('table__row', 'table__row--header');
 
     const $fragment = document.createDocumentFragment();
-
-    this.data.forEach(el => {
+    const tableContent = this.data.map(el => {
       const $tableRow = new TableRow(el, ROW_TYPE.CONTENT).render();
-      $fragment.append($tableRow);
+      $tableRow.classList.add('table__row', 'table__row--content');
+      return $tableRow;
     });
+    $fragment.append(...tableContent);
 
+    $tableContainer.className = 'table';
     $tableContentContainer.append($fragment);
-    console.log($tableContainer.children);
     $tableContainer.append($tableHeader, $tableContentContainer);
     return $tableContainer;
   }

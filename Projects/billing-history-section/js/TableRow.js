@@ -21,7 +21,9 @@ export class TableRow {
       $status.textContent = this.data.status;
       $amount.textContent = this.data.amount;
       $planType.textContent = this.data.plan;
-      $downloadLink.textContent = this.data.invoice_url;
+      $downloadLink.textContent = 'Download';
+      $downloadLink.href = this.data.invoice_url;
+      $downloadLink.target = '_blank';
     } else {
       $date.textContent = HEADERS.INVOICE;
       $status.textContent = HEADERS.STATUS;
