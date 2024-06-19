@@ -1,0 +1,5 @@
+class TableRow {
+  constructor() {}
+
+  render() {}
+}

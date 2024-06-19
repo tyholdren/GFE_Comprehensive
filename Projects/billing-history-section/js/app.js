@@ -1,8 +1,12 @@
+import { Table } from './Table.js';
+
 class App {
   constructor() {}
 
   initialize() {
-    this.fetchData();
+    const billingHistory = this.fetchData();
+    const table = new Table(billingHistory);
+    const $table = table.render();
   }
 
   async fetchData() {
@@ -11,6 +15,7 @@ class App {
     );
     const billingHistory = await response.json();
     console.log({ billingHistory });
+    return billingHistory;
   }
 }
 
