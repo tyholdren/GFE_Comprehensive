@@ -1,6 +1,8 @@
+import { ROW_TYPE } from './utils.js';
 export class TableRow {
-  constructor(data) {
+  constructor(data, rowType) {
     this.data = data;
+    this.rowType = rowType;
   }
 
   render() {
@@ -9,21 +11,28 @@ export class TableRow {
     const $status = document.createElement('span');
     const $amount = document.createElement('span');
     const $planType = document.createElement('span');
-    const $downloadLink = document.createElement('a');
+    let $downloadLink = null;
 
-    $date.textContent = this.data.created_at;
-    $status.textContent = this.data.status;
-    $amount.textContent = this.data.amount;
-    $planType.textContent = this.data.plan;
-    $downloadLink.textContent = this.data.invoice_url;
+    if (this.rowType === ROW_TYPE.CONTENT) {
+      $downloadLink = document.createElement('a');
 
-    $tableRowContainer.append(
-      $date,
-      $status,
-      $amount,
-      $planType,
-      $downloadLink
-    );
+      $date.textContent = this.data.created_at;
+      $status.textContent = this.data.status;
+      $amount.textContent = this.data.amount;
+      $planType.textContent = this.data.plan;
+      $downloadLink.textContent = this.data.invoice_url;
+    } else {
+      $date.textContent = this.data.invoiceHeader;
+      $status.textContent = this.data.statusHeader;
+      $amount.textContent = this.data.amountHeader;
+      $planType.textContent = this.data.planTypeHeader;
+    }
+
+    $tableRowContainer.append($date, $status, $amount, $planType);
+
+    if ($downloadLink !== null) {
+      $tableRowContainer.append($downloadLink);
+    }
 
     return $tableRowContainer;
   }

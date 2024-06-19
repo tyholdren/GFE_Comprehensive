@@ -10,7 +10,6 @@ class App {
     const table = new Table(billingHistory.data);
     const $table = table.render();
     this.appContainer.append($table);
-    return this.appContainer;
   }
 
   async fetchData() {
