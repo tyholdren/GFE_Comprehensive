@@ -1,5 +1,5 @@
 import { TableRow } from './TableRow.js';
-import { HEADERS, ROW_TYPE } from './utils.js';
+import { ROW_TYPE } from './utils.js';
 
 export class Table {
   constructor(data) {
@@ -8,10 +8,8 @@ export class Table {
 
   render() {
     const $tableContainer = document.createElement('div');
-    // const $tableHeader = document.createElement('div');
     const $tableContentContainer = document.createElement('div');
-
-    const $tableHeader = new TableRow(HEADERS, ROW_TYPE.HEADER).render();
+    const $tableHeader = new TableRow(undefined, ROW_TYPE.HEADER).render();
 
     const $fragment = document.createDocumentFragment();
 
@@ -21,6 +19,7 @@ export class Table {
     });
 
     $tableContentContainer.append($fragment);
+    console.log($tableContainer.children);
     $tableContainer.append($tableHeader, $tableContentContainer);
     return $tableContainer;
   }

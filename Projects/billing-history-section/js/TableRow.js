@@ -1,4 +1,5 @@
-import { ROW_TYPE } from './utils.js';
+import { HEADERS, ROW_TYPE } from './utils.js';
+
 export class TableRow {
   constructor(data, rowType) {
     this.data = data;
@@ -22,10 +23,10 @@ export class TableRow {
       $planType.textContent = this.data.plan;
       $downloadLink.textContent = this.data.invoice_url;
     } else {
-      $date.textContent = this.data.invoiceHeader;
-      $status.textContent = this.data.statusHeader;
-      $amount.textContent = this.data.amountHeader;
-      $planType.textContent = this.data.planTypeHeader;
+      $date.textContent = HEADERS.INVOICE;
+      $status.textContent = HEADERS.STATUS;
+      $amount.textContent = HEADERS.AMOUNT;
+      $planType.textContent = HEADERS.PLAN_TYPE;
     }
 
     $tableRowContainer.append($date, $status, $amount, $planType);
