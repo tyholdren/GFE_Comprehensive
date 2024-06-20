@@ -12,16 +12,14 @@ export class Table {
     const $tableHeader = new TableRow(undefined, ROW_TYPE.HEADER).render();
     $tableHeader.classList.add('table__row', 'table__row--header');
 
-    const $fragment = document.createDocumentFragment();
     const tableContent = this.data.map(el => {
       const $tableRow = new TableRow(el, ROW_TYPE.CONTENT).render();
       $tableRow.classList.add('table__row', 'table__row--content');
       return $tableRow;
     });
-    $fragment.append(...tableContent);
 
     $tableContainer.className = 'table';
-    $tableContentContainer.append($fragment);
+    $tableContentContainer.append(...tableContent);
     $tableContainer.append($tableHeader, $tableContentContainer);
     return $tableContainer;
   }

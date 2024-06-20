@@ -1,4 +1,5 @@
 import { HEADERS, ROW_TYPE } from './utils.js';
+import { TableColumn } from './TableColumn.js';
 
 export class TableRow {
   constructor(data, rowType) {
@@ -8,35 +9,21 @@ export class TableRow {
 
   render() {
     const $tableRowContainer = document.createElement('div');
-    const $date = document.createElement('span');
-    const $status = document.createElement('span');
-    const $amount = document.createElement('span');
-    const $planType = document.createElement('span');
-    let $downloadLink = null;
+    const $fragment = document.createDocumentFragment();
+    let tableColumns = null;
 
     if (this.rowType === ROW_TYPE.CONTENT) {
-      $downloadLink = document.createElement('a');
-
-      $date.textContent = this.data.created_at;
-      $status.textContent = this.data.status;
-      $amount.textContent = this.data.amount;
-      $planType.textContent = this.data.plan;
-      $downloadLink.textContent = 'Download';
-      $downloadLink.href = this.data.invoice_url;
-      $downloadLink.target = '_blank';
+      tableColumns = Object.values(this.data).map(value => {
+        return new TableColumn(value, 'small').render();
+      });
     } else {
-      $date.textContent = HEADERS.INVOICE;
-      $status.textContent = HEADERS.STATUS;
-      $amount.textContent = HEADERS.AMOUNT;
-      $planType.textContent = HEADERS.PLAN_TYPE;
+      tableColumns = Object.values(HEADERS).map(value => {
+        return new TableColumn(value, 'small').render();
+      });
     }
 
-    $tableRowContainer.append($date, $status, $amount, $planType);
-
-    if ($downloadLink !== null) {
-      $tableRowContainer.append($downloadLink);
-    }
-
+    $fragment.append(...tableColumns);
+    $tableRowContainer.append($fragment);
     return $tableRowContainer;
   }
 }

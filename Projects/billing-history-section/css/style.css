@@ -17,11 +17,23 @@ body {
   padding: 0;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.header-container {
+  margin: 0rem 2rem;
+}
+
 .table {
   border: 1px solid black;
+  margin: 2rem;
 }
 
 .table__row {
+  display: flex;
   border-top: 1px solid black;
   padding: 0.5rem 0rem;
 }
