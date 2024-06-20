@@ -7,16 +7,11 @@ export class TableColumn {
   }
 
   isLink(data) {
-    if (typeof data === 'string') {
-      return data.startsWith('https://');
-    }
-    return false;
+    return typeof data === 'string' && data.startsWith('https://');
   }
 
   isDate(data) {
-    if (typeof data === 'string') {
-      return data.includes('-');
-    }
+    return typeof data === 'string' && data.includes('-');
   }
 
   formatDate(data) {
