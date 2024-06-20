@@ -7,7 +7,6 @@ class App {
 
   async initialize() {
     const billingHistory = await this.fetchData();
-
     const data = billingHistory.data.map(el => {
       return {
         date: el.created_at,

@@ -1,4 +1,4 @@
-import { HEADERS, ROW_TYPE } from './utils.js';
+import { HEADERS, ROW_TYPE, COLUMN_TYPE } from './utils.js';
 import { TableColumn } from './TableColumn.js';
 
 export class TableRow {
@@ -14,11 +14,11 @@ export class TableRow {
 
     if (this.rowType === ROW_TYPE.CONTENT) {
       tableColumns = Object.values(this.data).map(value => {
-        return new TableColumn(value, 'small').render();
+        return new TableColumn(value, COLUMN_TYPE.SMALL).render();
       });
     } else {
       tableColumns = Object.values(HEADERS).map(value => {
-        return new TableColumn(value, 'small').render();
+        return new TableColumn(value, COLUMN_TYPE.MEDIUM).render();
       });
     }
 

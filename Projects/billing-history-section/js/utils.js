@@ -9,3 +9,9 @@ export const ROW_TYPE = {
   HEADER: 'header',
   CONTENT: 'content',
 };
+
+export const COLUMN_TYPE = {
+  SMALL: 'small',
+  MEDIUM: 'medium',
+  LARGE: 'large',
+};
