@@ -25,6 +25,11 @@ export const COLUMN_TYPE = {
   LARGE: 'large',
 };
 
+export const STATUS_TYPE = {
+  PENDING: 'Pending',
+  PAID: 'Paid',
+};
+
 export const MONTH_NAMES = [
   'Jan',
   'Feb',

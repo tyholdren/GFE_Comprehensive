@@ -1,4 +1,4 @@
-import { MONTH_NAMES, ROW_TYPE, CONTENT_TYPE } from './utils.js';
+import { MONTH_NAMES, ROW_TYPE, CONTENT_TYPE, STATUS_TYPE } from './utils.js';
 
 export class TableColumn {
   constructor(data, rowType, columnType) {
@@ -28,6 +28,7 @@ export class TableColumn {
     let $columnData = document.createElement('div');
 
     if (this.rowType === ROW_TYPE.CONTENT) {
+      $dataContainer.classList.add('table__column--data-container--content');
       const [contentType, contentValue] = this.formattedData;
 
       if (contentType === CONTENT_TYPE.LINK) {
@@ -52,7 +53,14 @@ export class TableColumn {
     }
 
     $columnData.classList.add('table__column--data', this.columnType);
-    $dataContainer.className = 'table__row--data-container';
+
+    if (this.formattedData === STATUS_TYPE.PENDING) {
+      $columnData.classList.add('table__column--data--pending');
+    } else if (this.formattedData === STATUS_TYPE.PAID) {
+      $columnData.classList.add('table__column--data--paid');
+    }
+
+    $dataContainer.classList.add('table__row--data-container');
     $dataContainer.append($columnData);
     return $dataContainer;
   }
