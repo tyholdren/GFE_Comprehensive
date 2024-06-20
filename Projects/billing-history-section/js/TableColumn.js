@@ -31,20 +31,25 @@ export class TableColumn {
       $dataContainer.classList.add('table__column--data-container--content');
       const [contentType, contentValue] = this.formattedData;
 
-      if (contentType === CONTENT_TYPE.LINK) {
-        $columnData = document.createElement('a');
-        $columnData.textContent = 'Download';
-        $columnData.href = contentValue;
-        $columnData.target = '_blank';
-        $columnData.classList.add('table__column--last-cell');
-      } else if (contentType === CONTENT_TYPE.INVOICE) {
-        this.formattedData = this.formatDate(contentValue);
-      } else if (contentType === CONTENT_TYPE.AMOUNT) {
-        this.formattedData = this.formatAmount(contentValue);
-      } else if (contentType === CONTENT_TYPE.PLAN_TYPE) {
-        this.formattedData = `${this.formatUpperCase(contentValue)} plan`;
-      } else {
-        this.formattedData = this.formatUpperCase(contentValue);
+      switch (contentType) {
+        case CONTENT_TYPE.LINK:
+          $columnData = document.createElement('a');
+          $columnData.textContent = 'Download';
+          $columnData.href = contentValue;
+          $columnData.target = '_blank';
+          break;
+        case CONTENT_TYPE.INVOICE:
+          this.formattedData = this.formatDate(contentValue);
+          break;
+        case CONTENT_TYPE.AMOUNT:
+          this.formattedData = this.formatAmount(contentValue);
+          break;
+        case CONTENT_TYPE.PLAN_TYPE:
+          this.formattedData = `${this.formatUpperCase(contentValue)} plan`;
+          break;
+        default:
+          this.formattedData = this.formatUpperCase(contentValue);
+          break;
       }
     }
 
