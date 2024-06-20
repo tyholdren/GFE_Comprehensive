@@ -10,11 +10,11 @@ export class Table {
     const $tableContainer = document.createElement('div');
     const $tableContentContainer = document.createElement('div');
     const $tableHeader = new TableRow(undefined, ROW_TYPE.HEADER).render();
-    $tableHeader.classList.add('table__row');
+    $tableHeader.classList.add('row');
 
     const tableContent = this.data.map(el => {
       const $tableRow = new TableRow(el, ROW_TYPE.CONTENT).render();
-      $tableRow.classList.add('table__row');
+      $tableRow.classList.add('row');
       return $tableRow;
     });
 

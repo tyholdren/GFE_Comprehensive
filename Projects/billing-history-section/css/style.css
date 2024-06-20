@@ -34,7 +34,7 @@ body {
   margin: 2rem;
 }
 
-.table__row {
+.row {
   display: flex;
   width: 100%;
 }
