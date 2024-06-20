@@ -33,6 +33,7 @@ export class TableColumn {
 
       switch (contentType) {
         case CONTENT_TYPE.LINK:
+          $dataContainer.style.justifyContent = 'flex-end';
           $columnData = document.createElement('a');
           $columnData.textContent = 'Download';
           $columnData.href = contentValue;
