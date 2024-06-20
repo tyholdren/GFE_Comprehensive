@@ -6,6 +6,14 @@ export const HEADERS = {
   NO_HEADER: '',
 };
 
+export const CONTENT_TYPE = {
+  INVOICE: 'Invoice',
+  STATUS: 'Status',
+  AMOUNT: 'Amount',
+  PLAN_TYPE: 'Plan',
+  LINK: 'Link',
+};
+
 export const ROW_TYPE = {
   HEADER: 'header',
   CONTENT: 'content',

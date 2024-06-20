@@ -13,12 +13,20 @@ export class TableRow {
     let tableColumns = null;
 
     if (this.rowType === ROW_TYPE.CONTENT) {
-      tableColumns = Object.values(this.data).map(value => {
-        return new TableColumn(value, COLUMN_TYPE.SMALL).render();
+      tableColumns = Object.entries(this.data).map(entry => {
+        return new TableColumn(
+          entry,
+          ROW_TYPE.CONTENT,
+          COLUMN_TYPE.SMALL
+        ).render();
       });
     } else {
       tableColumns = Object.values(HEADERS).map(value => {
-        return new TableColumn(value, COLUMN_TYPE.MEDIUM).render();
+        return new TableColumn(
+          value,
+          ROW_TYPE.HEADER,
+          COLUMN_TYPE.MEDIUM
+        ).render();
       });
     }
 

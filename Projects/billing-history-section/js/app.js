@@ -1,3 +1,4 @@
+import { CONTENT_TYPE } from './utils.js';
 import { Table } from './Table.js';
 
 class App {
@@ -9,11 +10,11 @@ class App {
     const billingHistory = await this.fetchData();
     const data = billingHistory.data.map(el => {
       return {
-        date: el.created_at,
-        status: el.status,
-        amount: el.amount,
-        plan: el.plan,
-        link: el.invoice_url,
+        [CONTENT_TYPE.INVOICE]: el.created_at,
+        [CONTENT_TYPE.STATUS]: el.status,
+        [CONTENT_TYPE.AMOUNT]: el.amount,
+        [CONTENT_TYPE.PLAN_TYPE]: el.plan,
+        [CONTENT_TYPE.LINK]: el.invoice_url,
       };
     });
 
