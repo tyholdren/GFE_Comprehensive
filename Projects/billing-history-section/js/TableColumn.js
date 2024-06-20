@@ -41,7 +41,10 @@ export class TableColumn {
       }
     }
 
-    $columnData.textContent = this.formattedData;
+    if ($columnData.textContent === '') {
+      $columnData.textContent = this.formattedData;
+    }
+
     $columnData.classList.add('table__column--data', this.columnType);
     $dataContainer.className = 'table__row--data-container';
     $dataContainer.append($columnData);
