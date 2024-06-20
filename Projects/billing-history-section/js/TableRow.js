@@ -24,6 +24,7 @@ export class TableRow {
 
     $fragment.append(...tableColumns);
     $tableRowContainer.append($fragment);
+    $tableRowContainer.className = 'table__row--container';
     return $tableRowContainer;
   }
 }

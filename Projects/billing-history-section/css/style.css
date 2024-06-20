@@ -28,12 +28,20 @@ body {
 }
 
 .table {
+  display: flex;
+  flex-direction: column;
   border: 1px solid black;
   margin: 2rem;
 }
 
 .table__row {
   display: flex;
+  width: 100%;
+}
+
+.table__row--data-container {
+  display: flex;
+  width: 100%;
 }
 
 .table__row--header {
@@ -44,7 +52,6 @@ body {
   background-color: green;
 }
 
-.table__column {
-  width: 20%;
+.table__column--data {
   margin: 1rem;
 }

@@ -16,3 +16,18 @@ export const COLUMN_TYPE = {
   MEDIUM: 'medium',
   LARGE: 'large',
 };
+
+export const MONTH_NAMES = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
