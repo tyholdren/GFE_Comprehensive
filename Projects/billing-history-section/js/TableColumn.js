@@ -12,11 +12,15 @@ export class TableColumn {
     const month = MONTH_NAMES[parseInt(data.slice(5, 7)) - 1];
     const year = data.slice(0, 4);
 
-    return `${day} ${month} ${year}`;
+    return `${day} ${month}, ${year}`;
   }
 
   formatAmount(data) {
     return `$${data}.00`;
+  }
+
+  formatUpperCase(data) {
+    return data[0].toUpperCase() + data.slice(1);
   }
 
   render() {
@@ -36,8 +40,10 @@ export class TableColumn {
         this.formattedData = this.formatDate(contentValue);
       } else if (contentType === CONTENT_TYPE.AMOUNT) {
         this.formattedData = this.formatAmount(contentValue);
+      } else if (contentType === CONTENT_TYPE.PLAN_TYPE) {
+        this.formattedData = `${this.formatUpperCase(contentValue)} plan`;
       } else {
-        this.formattedData = contentValue;
+        this.formattedData = this.formatUpperCase(contentValue);
       }
     }
 

@@ -8,7 +8,7 @@ class App {
 
   async initialize() {
     const billingHistory = await this.fetchData();
-    const data = billingHistory.data.map(el => {
+    const formattedData = billingHistory.data.map(el => {
       return {
         [CONTENT_TYPE.INVOICE]: el.created_at,
         [CONTENT_TYPE.STATUS]: el.status,
@@ -18,7 +18,7 @@ class App {
       };
     });
 
-    const $table = new Table(data).render();
+    const $table = new Table(formattedData).render();
     this.appContainer.append($table);
   }
 
