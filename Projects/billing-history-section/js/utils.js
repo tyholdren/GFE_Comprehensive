@@ -3,6 +3,7 @@ export const HEADERS = {
   STATUS: 'Status',
   AMOUNT: 'Amount',
   PLAN_TYPE: 'Plan',
+  NO_HEADER: '',
 };
 
 export const ROW_TYPE = {

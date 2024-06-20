@@ -24,7 +24,7 @@ export class TableColumn {
       $columnData.textContent = this.data;
     }
 
-    $columnData.classList.add('table-column', this.columnType);
+    $columnData.classList.add('table__column', this.columnType);
     return $columnData;
   }
 }
