@@ -2,8 +2,7 @@ import { MONTH_NAMES, ROW_TYPE, CONTENT_TYPE } from './utils.js';
 
 export class TableColumn {
   constructor(data, rowType, columnType) {
-    this.data = data;
-    this.dataValue = this.data;
+    this.formattedData = data;
     this.rowType = rowType;
     this.columnType = columnType;
   }
@@ -25,24 +24,24 @@ export class TableColumn {
     let $columnData = document.createElement('div');
 
     if (this.rowType === ROW_TYPE.CONTENT) {
-      const contentType = this.data[0];
+      const [contentType, contentValue] = this.formattedData;
 
       if (contentType === CONTENT_TYPE.LINK) {
         $columnData = document.createElement('a');
         $columnData.textContent = 'Download';
-        $columnData.href = this.dataValue;
+        $columnData.href = contentValue;
         $columnData.target = '_blank';
         $columnData.classList.add('table__column--last-cell');
       } else if (contentType === CONTENT_TYPE.INVOICE) {
-        this.dataValue = this.formatDate(this.dataValue);
-        $columnData.textContent = this.dataValue;
+        this.formattedData = this.formatDate(contentValue);
       } else if (contentType === CONTENT_TYPE.AMOUNT) {
-        this.dataValue = this.formatAmount(this.dataValue);
-        $columnData.textContent = this.dataValue;
+        this.formattedData = this.formatAmount(contentValue);
+      } else {
+        this.formattedData = contentValue;
       }
     }
 
-    $columnData.textContent = this.dataValue;
+    $columnData.textContent = this.formattedData;
     $columnData.classList.add('table__column--data', this.columnType);
     $dataContainer.className = 'table__row--data-container';
     $dataContainer.append($columnData);
