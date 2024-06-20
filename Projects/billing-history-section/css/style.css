@@ -39,32 +39,20 @@ body {
   width: 100%;
 }
 
-.table__row--data-container {
+.row__data-container {
   display: flex;
   width: 100%;
 }
 
-.table__column--data-container--content {
+.column-data--content {
   border-top: 1px solid black;
 }
 
-.table__row--header {
-  /* background-color: yellow; */
-}
-
-.table__row--content {
-  /* background-color: green; */
-}
-
-.table__column--data {
+.column-data {
   margin: 1rem;
 }
 
-.table__column--data--pending {
-  background-color: red;
-}
-
-.table__column--data--paid {
+.column-data--paid {
   border: 1px solid black;
   padding: 0.25rem;
   border-radius: 0.9rem;

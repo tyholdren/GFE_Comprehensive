@@ -28,7 +28,7 @@ export class TableColumn {
     let $columnData = document.createElement('div');
 
     if (this.rowType === ROW_TYPE.CONTENT) {
-      $dataContainer.classList.add('table__column--data-container--content');
+      $dataContainer.classList.add('column-data--content');
       const [contentType, contentValue] = this.formattedData;
 
       switch (contentType) {
@@ -58,15 +58,15 @@ export class TableColumn {
       $columnData.textContent = this.formattedData;
     }
 
-    $columnData.classList.add('table__column--data', this.columnType);
+    $columnData.classList.add('column-data', this.columnType);
 
     if (this.formattedData === STATUS_TYPE.PENDING) {
-      $columnData.classList.add('table__column--data--pending');
+      $columnData.classList.add('column-data--pending');
     } else if (this.formattedData === STATUS_TYPE.PAID) {
-      $columnData.classList.add('table__column--data--paid');
+      $columnData.classList.add('column-data--paid');
     }
 
-    $dataContainer.classList.add('table__row--data-container');
+    $dataContainer.classList.add('row__data-container');
     $dataContainer.append($columnData);
     return $dataContainer;
   }
