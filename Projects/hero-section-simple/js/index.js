@@ -6,24 +6,32 @@ class App {
   initialize() {
     const $title = document.createElement('h1');
     const $subtitle = document.createElement('h3');
-    const $learnMoreBtn = document.createElement('button');
-    const $seePricingBtn = document.createElement('button');
+    const $learnMoreLink = document.createElement('a');
+    const $seePricingLink = document.createElement('a');
     const $mainImage = document.createElement('img');
     const $contentWrapper = document.createElement('div');
     const $imageWrapper = document.createElement('div');
-    const $btnWrapper = document.createElement('div');
+    const $linkWrapper = document.createElement('div');
+
+    $contentWrapper.classList.add('content-wrapper');
+    $title.classList.add('content-wrapper__title');
+    $subtitle.classList.add('content-wrapper__subtitle');
+    $linkWrapper.classList.add('link-wrapper');
 
     $title.textContent = 'Well crafted abstract images';
     $subtitle.textContent =
       'High quality abstract images for your projects, wallpaper and presentations.';
-    $learnMoreBtn.textContent = 'Learn more';
-    $seePricingBtn.textContent = 'See pricing';
+    $learnMoreLink.textContent = 'Learn more';
+    $learnMoreLink.href = 'http://';
+    $learnMoreLink.target = 'blank';
+    $seePricingLink.textContent = 'See pricing';
+    $seePricingLink.href = 'http://';
+    $seePricingLink.target = 'blank';
     $mainImage.src = './img/prism.png';
     $mainImage.alt = 'main image';
 
-    $btnWrapper.append($learnMoreBtn, $seePricingBtn);
-    $contentWrapper.append($title, $subtitle, $btnWrapper);
-
+    $linkWrapper.append($learnMoreLink, $seePricingLink);
+    $contentWrapper.append($title, $subtitle, $linkWrapper);
     $imageWrapper.append($mainImage);
 
     this.$appContainer.append($contentWrapper, $imageWrapper);

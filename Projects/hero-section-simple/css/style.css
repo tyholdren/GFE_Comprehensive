@@ -19,4 +19,24 @@ body {
   align-items: center;
   justify-content: center;
   padding: 6rem;
+  gap: 2rem;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrapper__title {
+  margin-bottom: 1.5rem;
+}
+
+.content-wrapper__subtitle {
+  margin-bottom: 4rem;
+}
+
+.link-wrapper a {
+  margin-right: 2rem;
+  border: 1px solid black;
+  padding: 1rem 2.25rem;
 }
