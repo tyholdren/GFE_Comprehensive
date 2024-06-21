@@ -28,10 +28,12 @@ body {
 }
 
 .content-wrapper__title {
+  font-size: 3.75rem;
   margin-bottom: 1.5rem;
 }
 
 .content-wrapper__subtitle {
+  font-size: 1.25rem;
   margin-bottom: 4rem;
 }
 
@@ -39,4 +41,13 @@ body {
   margin-right: 2rem;
   border: 1px solid black;
   padding: 1rem 2.25rem;
+}
+
+.link-wrapper__link--secondary {
+  background-color: white;
+}
+
+.link-wrapper__link--primary {
+  background-color: #4338ca;
+  color: white;
 }

@@ -24,9 +24,11 @@ class App {
     $learnMoreLink.textContent = 'Learn more';
     $learnMoreLink.href = 'http://';
     $learnMoreLink.target = 'blank';
+    $learnMoreLink.classList.add('link-wrapper__link--secondary');
     $seePricingLink.textContent = 'See pricing';
     $seePricingLink.href = 'http://';
     $seePricingLink.target = 'blank';
+    $seePricingLink.classList.add('link-wrapper__link--primary');
     $mainImage.src = './img/prism.png';
     $mainImage.alt = 'main image';
 
