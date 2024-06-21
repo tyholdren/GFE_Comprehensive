@@ -23,6 +23,20 @@ body {
   margin: 4rem 6rem;
 }
 
+@media (max-width: 768px) {
+  .app-container {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .header {
   font-size: 1.5rem;
   color: #171717;
@@ -61,6 +75,7 @@ body {
 }
 
 .column-data--content {
+  font-size: 0.875rem;
   border-top: 1px solid #e5e5e5;
 }
 
