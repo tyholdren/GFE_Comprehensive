@@ -49,6 +49,21 @@ export class TableColumn {
         case CONTENT_TYPE.PLAN_TYPE:
           this.formattedData = `${this.formatUpperCase(contentValue)} plan`;
           break;
+        case CONTENT_TYPE.STATUS:
+          this.formattedData = this.formatUpperCase(contentValue);
+
+          switch (this.formattedData) {
+            case STATUS_TYPE.PENDING:
+              $columnData.classList.add('column-data--pending');
+              break;
+            case STATUS_TYPE.PAID:
+              $columnData.classList.add('column-data--paid');
+              break;
+            default:
+              console.log('error');
+          }
+
+          break;
         default:
           this.formattedData = this.formatUpperCase(contentValue);
           break;
@@ -62,13 +77,6 @@ export class TableColumn {
     }
 
     $columnData.classList.add('column-data', this.columnType);
-
-    if (this.formattedData === STATUS_TYPE.PENDING) {
-      $columnData.classList.add('column-data--pending');
-    } else if (this.formattedData === STATUS_TYPE.PAID) {
-      $columnData.classList.add('column-data--paid');
-    }
-
     $dataContainer.classList.add('row__data-container');
     $dataContainer.append($columnData);
     return $dataContainer;
