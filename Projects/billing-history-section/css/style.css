@@ -19,6 +19,7 @@ body {
 
 .app-container {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   margin: 4rem 6rem;
 }
@@ -32,8 +33,7 @@ body {
 
 @media (max-width: 375px) {
   .app-container {
-    display: flex;
-    flex-direction: column;
+    width: 375px;
   }
 }
 
