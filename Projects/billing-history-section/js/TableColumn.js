@@ -38,6 +38,7 @@ export class TableColumn {
           $columnData.textContent = 'Download';
           $columnData.href = contentValue;
           $columnData.target = '_blank';
+          $columnData.classList.add('column-data--link');
           break;
         case CONTENT_TYPE.INVOICE:
           this.formattedData = this.formatDate(contentValue);
@@ -52,6 +53,8 @@ export class TableColumn {
           this.formattedData = this.formatUpperCase(contentValue);
           break;
       }
+    } else {
+      $dataContainer.classList.add('column-data--meta-data');
     }
 
     if ($columnData.textContent === '') {

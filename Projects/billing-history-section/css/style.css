@@ -27,10 +27,19 @@ body {
   margin: 0rem 2rem;
 }
 
+.header {
+  color: #171717;
+}
+
+.sub-header {
+  color: #737373;
+}
+
 .table {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.5rem;
   margin: 2rem;
 }
 
@@ -44,18 +53,28 @@ body {
   width: 100%;
 }
 
-.column-data--content {
-  border-top: 1px solid black;
-}
-
 .column-data {
   margin: 1rem;
 }
 
+.column-data--meta-data {
+  color: #525252;
+}
+
+.column-data--content {
+  border-top: 1px solid #e5e5e5;
+}
+
 .column-data--paid {
-  border: 1px solid black;
-  padding: 0.25rem;
+  border: 1px solid #bbf7d0;
+  padding: 0.25rem 1rem;
   border-radius: 0.9rem;
-  width: 3rem;
-  background-color: green;
+  background-color: #f0fdf4;
+  color: #388e3c;
+  text-align: center;
+}
+
+.column-data--link {
+  color: #4338ca;
+  text-decoration: none;
 }
