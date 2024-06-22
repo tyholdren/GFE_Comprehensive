@@ -14,12 +14,7 @@ body {
   padding: 0;
 }
 
-.window-container {
-  padding: 1rem;
-  color: #f9fafb;
-}
-
-.app-container {
+.app-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,6 +49,7 @@ body {
 
 .link-wrapper__link--secondary {
   background-color: white;
+  filter: drop-shadow(1px 1px 1px #525252);
   color: black;
 }
 
@@ -63,13 +59,13 @@ body {
 }
 
 @media screen and (max-width: 1440px) {
-  .app-container {
+  .app-wrapper {
     max-width: 100%;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .app-container {
+  .app-wrapper {
     flex-direction: column;
     padding: 4rem 0.75rem;
   }
@@ -88,7 +84,7 @@ body {
 }
 
 @media screen and (max-width: 375px) {
-  .app-container {
+  .app-wrapper {
     gap: 3rem;
   }
 

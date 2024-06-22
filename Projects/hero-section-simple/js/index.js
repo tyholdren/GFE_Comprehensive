@@ -1,7 +1,6 @@
 class App {
   constructor() {
-    this.$windowContainer = document.getElementById('window-container');
-    this.$appContainer = document.getElementById('app-container');
+    this.$appwrapper = document.getElementById('app-wrapper');
   }
 
   initialize() {
@@ -14,7 +13,6 @@ class App {
     const $imageWrapper = document.createElement('div');
     const $linkWrapper = document.createElement('div');
 
-    this.$windowContainer.classList.add('window-container');
     $contentWrapper.classList.add('content-wrapper');
     $title.classList.add('content-wrapper__title');
     $subtitle.classList.add('content-wrapper__subtitle');
@@ -39,8 +37,7 @@ class App {
     $contentWrapper.append($title, $subtitle, $linkWrapper);
     $imageWrapper.append($mainImage);
 
-    this.$appContainer.append($contentWrapper, $imageWrapper);
-    this.$windowContainer.append(this.$appContainer);
+    this.$appwrapper.append($contentWrapper, $imageWrapper);
   }
 }
 
