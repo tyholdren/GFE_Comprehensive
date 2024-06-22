@@ -21,6 +21,7 @@ class ProfileCard {
     $profileImg.alt = 'user profile photo';
     $profileImg.className = 'content-wrapper__profile-img';
     $profileName.textContent = 'Sara Dole';
+    $profileName.className = 'content-wrapper__profile-name';
     $profileTitle.textContent = ' Front End Engineer @ Microsoft';
     $profileTitle.className = 'content-wrapper__profile-title';
     $profileDesc.textContent =
