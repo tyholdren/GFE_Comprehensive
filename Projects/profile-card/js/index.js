@@ -25,7 +25,9 @@ class ProfileCard {
     $profileTitle.className = 'content-wrapper__profile-title';
     $profileDesc.textContent =
       'I turn coffee into bugs which are fixed by someone else. Certified Stack Overflow and ChatGPT developer.';
+    $profileDesc.className = 'content-wrapper__profile-desc';
     $contactBtn.textContent = 'Contact me';
+    $contactBtn.className = 'content-wrapper__contact-link';
     $contactBtn.href = 'https://';
     $contactBtn.target = 'blank';
 
