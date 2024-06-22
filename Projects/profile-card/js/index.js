@@ -1,6 +1,6 @@
 class ProfileCard {
   constructor() {
-    this.$appContainer = document.getElementById('app-container');
+    this.$appWrapper = document.getElementById('app-wrapper');
   }
 
   initialize() {
@@ -19,8 +19,10 @@ class ProfileCard {
 
     $profileImg.src = './img/profile.png';
     $profileImg.alt = 'user profile photo';
+    $profileImg.className = 'content-wrapper__profile-img';
     $profileName.textContent = 'Sara Dole';
     $profileTitle.textContent = ' Front End Engineer @ Microsoft';
+    $profileTitle.className = 'content-wrapper__profile-title';
     $profileDesc.textContent =
       'I turn coffee into bugs which are fixed by someone else. Certified Stack Overflow and ChatGPT developer.';
     $contactBtn.textContent = 'Contact me';
@@ -44,17 +46,18 @@ class ProfileCard {
       $twitterSocial
     );
 
-    $contentWrapper.className = 'card-wrapper';
+    $contentWrapper.className = 'content-wrapper';
     $contentWrapper.append(
       $profileImg,
       $profileName,
+      $profileTitle,
       $profileDesc,
       $contactBtn
     );
 
     $cardWrapper.className = 'card-wrapper';
     $cardWrapper.append($contentWrapper, $socialsWrapper);
-    this.$appContainer.append($cardWrapper);
+    this.$appWrapper.append($cardWrapper);
   }
 }
 
