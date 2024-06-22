@@ -16,6 +16,7 @@ class App {
     $contentWrapper.classList.add('content-wrapper');
     $title.classList.add('content-wrapper__title');
     $subtitle.classList.add('content-wrapper__subtitle');
+    $imageWrapper.classList.add('image-wrapper');
     $linkWrapper.classList.add('link-wrapper');
 
     $title.textContent = 'Well crafted abstract images';

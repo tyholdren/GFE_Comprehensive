@@ -20,6 +20,7 @@ body {
   justify-content: center;
   padding: 6rem;
   gap: 2rem;
+  background-color: #f9fafb;
 }
 
 .content-wrapper {
@@ -30,16 +31,19 @@ body {
 .content-wrapper__title {
   font-size: 3.75rem;
   margin-bottom: 1.5rem;
+  color: #171717;
 }
 
 .content-wrapper__subtitle {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   margin-bottom: 4rem;
+  color: #525252;
 }
 
 .link-wrapper a {
+  display: inline-block;
   margin-right: 2rem;
-  border: 1px solid black;
+  border-radius: 0.25rem;
   padding: 1rem 2.25rem;
 }
 
@@ -49,5 +53,58 @@ body {
 
 .link-wrapper__link--primary {
   background-color: #4338ca;
-  color: white;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 1440px) {
+  .app-container {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    padding: 4rem 0.75rem;
+  }
+
+  .content-wrapper {
+    width: 100%;
+  }
+
+  .content-wrapper__title {
+    font-size: 3rem;
+  }
+
+  .content-wrapper__subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .link-wrapper {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .link-wrapper a {
+    padding: 0.75rem 2rem;
+  }
+
+  .link-wrapper__link--secondary,
+  .link-wrapper__link--primary {
+    font-size: 0.825rem;
+  }
+
+  .content-wrapper {
+    width: 100%;
+  }
+
+  .content-wrapper__title {
+    font-size: 2.25rem;
+  }
+
+  .content-wrapper__subtitle {
+    font-size: 1.125rem;
+  }
 }
