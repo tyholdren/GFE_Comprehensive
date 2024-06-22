@@ -4,6 +4,7 @@ class ProfileCard {
   }
 
   initialize() {
+    const $cardWrapper = document.createElement('div');
     const $contentWrapper = document.createElement('div');
     const $profileImg = document.createElement('img');
     const $profileName = document.createElement('div');
@@ -34,6 +35,8 @@ class ProfileCard {
     $instagramSocial.alt = 'socials image';
     $twitterSocial.src = './img/twitter-x.svg';
     $twitterSocial.alt = 'socials image';
+    $socialsWrapper.className = 'socials-wrapper';
+
     $socialsWrapper.append(
       $githubSocial,
       $linkedInSocial,
@@ -41,6 +44,7 @@ class ProfileCard {
       $twitterSocial
     );
 
+    $contentWrapper.className = 'card-wrapper';
     $contentWrapper.append(
       $profileImg,
       $profileName,
@@ -48,7 +52,9 @@ class ProfileCard {
       $contactBtn
     );
 
-    this.$appContainer.append($contentWrapper, $socialsWrapper);
+    $cardWrapper.className = 'card-wrapper';
+    $cardWrapper.append($contentWrapper, $socialsWrapper);
+    this.$appContainer.append($cardWrapper);
   }
 }
 
