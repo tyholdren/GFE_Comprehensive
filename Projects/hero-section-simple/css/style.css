@@ -14,6 +14,11 @@ body {
   padding: 0;
 }
 
+.window-container {
+  padding: 1rem;
+  color: #f9fafb;
+}
+
 .app-container {
   display: flex;
   align-items: center;
@@ -49,6 +54,7 @@ body {
 
 .link-wrapper__link--secondary {
   background-color: white;
+  color: black;
 }
 
 .link-wrapper__link--primary {
@@ -82,6 +88,10 @@ body {
 }
 
 @media screen and (max-width: 375px) {
+  .app-container {
+    gap: 3rem;
+  }
+
   .link-wrapper {
     display: flex;
     gap: 1rem;
