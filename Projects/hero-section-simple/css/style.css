@@ -1,5 +1,20 @@
 /* Put any custom CSS styles here.  */
 /* Be sure to delete the <style> tag in index.html if you want to use this stylesheet. */
+
+:root {
+  --primaryColor: #171717;
+  --secondaryColor: #525252;
+
+  --buttonSecondaryColor: #4338ca;
+  --buttonPrimaryColor: #ffffff;
+
+  --buttonPrimaryColorHover: #fafafa;
+  --buttonSecondaryColorHover: #3730a3;
+
+  --textButtonDisabledColor: #a3a3a3;
+  --buttonFocusOutlineColor: #f5f5f5;
+}
+
 body {
   margin: 0;
   font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont,
@@ -31,13 +46,13 @@ body {
 .content-wrapper__title {
   font-size: 3.75rem;
   margin-bottom: 1.5rem;
-  color: #171717;
+  color: var(--primaryColor);
 }
 
 .content-wrapper__subtitle {
   font-size: 1.125rem;
   margin-bottom: 4rem;
-  color: #525252;
+  color: var(--secondaryColor);
 }
 
 .link-wrapper a {
@@ -47,15 +62,37 @@ body {
   padding: 1rem 2.25rem;
 }
 
-.link-wrapper__link--secondary {
-  background-color: white;
-  filter: drop-shadow(1px 1px 1px #525252);
-  color: black;
+.link-wrapper__link--primary {
+  background-color: var(--buttonSecondaryColor);
+  color: var(--buttonPrimaryColor);
+  &:hover {
+    background-color: var(--buttonSecondaryColorHover);
+  }
+  &:focus {
+    border: 1px solid var(--buttonFocusOutlineColor);
+    background-color: var(--buttonSecondaryColorHover);
+  }
+  &:disabled {
+    color: var(--textButtonDisabledColor);
+    background-color: var(--buttonFocusOutlineColor);
+  }
 }
 
-.link-wrapper__link--primary {
-  background-color: #4338ca;
-  color: #ffffff;
+.link-wrapper__link--secondary {
+  background-color: white;
+  filter: drop-shadow(1px 1px 1px var(--secondaryColor));
+  color: black;
+  &:hover {
+    background-color: var(--buttonPrimaryColorHover);
+  }
+  &:focus {
+    border: 1px solid var(--buttonFocusOutlineColor);
+    background-color: var(--buttonPrimaryColorHover);
+  }
+  &:disabled {
+    color: var(----textButtonDisabledColor);
+    background-color: var(--buttonFocusOutlineColor);
+  }
 }
 
 @media screen and (max-width: 1440px) {
