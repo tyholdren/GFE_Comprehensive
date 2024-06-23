@@ -8,8 +8,8 @@ class App {
   }
 
   async initialize() {
-    const products = await this.fetchProducts();
-    const _products = products.data.map((el, index) => {
+    const response = await this.fetchProducts();
+    const products = response.data.map((el, index) => {
       return new ProductCard(el, index).render();
     });
 
@@ -28,7 +28,7 @@ class App {
     $viewAllBtn.className = 'header-container__view-all-btn';
 
     $headerContainer.append($headerTitle, $viewAllBtn);
-    $productsContainer.append(..._products.slice(0, 8));
+    $productsContainer.append(...products.slice(0, 8));
     this.$appContainer.append($headerContainer, $productsContainer);
   }
 

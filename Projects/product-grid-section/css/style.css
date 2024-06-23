@@ -54,14 +54,14 @@ body {
   /* margin-top: 2rem; */
 }
 
-.product-container__img-container {
+.img-container {
   /* width: 17.5rem; */
   height: 18.75rem;
   overflow: hidden;
   border-radius: 0.5rem;
 }
 
-.product-container__img {
+.img-container__img {
   /* min-width: 100%;
   min-height: 100%; */
   width: 100%;

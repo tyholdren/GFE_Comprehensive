@@ -82,8 +82,8 @@ export class ProductCard {
     $selectedColor.className = 'product-container__selected-color';
     $productContainer.className = 'product-container';
 
-    $imgContainer.className = 'product-container__img-container';
-    $productImg.className = 'product-container__img';
+    $imgContainer.className = 'img-container';
+    $productImg.className = 'img-container__img';
 
     $productContainer.append(
       $imgContainer,
