@@ -24,6 +24,7 @@ body {
   margin: 1rem;
   padding: 6rem;
   background-color: white;
+  border-radius: 0.5rem;
 }
 
 .header-container {

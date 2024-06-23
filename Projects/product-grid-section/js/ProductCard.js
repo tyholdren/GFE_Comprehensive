@@ -16,6 +16,13 @@ export class ProductCard {
     });
   }
 
+  formatUpperCase(string) {
+    console.log({ string });
+    const newString = string[0].toUpperCase() + string.slice(1);
+    console.log({ newString });
+    return newString;
+  }
+
   updateSelection(imgId, newColor) {
     this.updateCurrentColor(newColor);
     const curImg = document.getElementById(imgId);
@@ -24,7 +31,7 @@ export class ProductCard {
 
   updateCurrentColor(newColor) {
     const curColor = document.getElementById(this.selectedColor.id);
-    curColor.textContent = newColor[0].toUpperCase() + newColor.slice(1);
+    curColor.textContent = this.formatUpperCase(newColor);
   }
 
   render() {
@@ -66,9 +73,7 @@ export class ProductCard {
     $productImg.src = this.colors[this.selectedColor.color];
     $productImg.alt = product_id;
     $selectedColor.id = this.selectedColor.id;
-    $selectedColor.textContent =
-      this.selectedColor.color[0].toUpperCase() +
-      this.selectedColor.color.slice(1);
+    $selectedColor.textContent = this.formatUpperCase(this.selectedColor.color);
     $name.textContent = name;
     $price.textContent = `$${priceRange.highest}`;
 
