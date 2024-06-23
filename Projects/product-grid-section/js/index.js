@@ -9,12 +9,18 @@ class App {
 
   async initialize() {
     const products = await this.fetchProducts();
-    console.log({ products });
     const _products = products.data.map(el => {
       return new ProductCard(el).render();
     });
-    console.log({ _products });
-    this.$appContainer.append(..._products);
+
+    const $headerContainer = document.createElement('section');
+    const $headerTitle = document.createElement('span');
+    const $viewAllBtn = document.createElement('button');
+
+    $headerTitle.textContent = 'Latest Arrivals';
+    $viewAllBtn.textContent = 'View all';
+    $headerContainer.append($headerTitle, $viewAllBtn);
+    this.$appContainer.append($headerContainer, ..._products);
   }
 
   async fetchProducts() {
