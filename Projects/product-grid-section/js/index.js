@@ -9,8 +9,8 @@ class App {
 
   async initialize() {
     const products = await this.fetchProducts();
-    const _products = products.data.map(el => {
-      return new ProductCard(el).render();
+    const _products = products.data.map((el, index) => {
+      return new ProductCard(el, index).render();
     });
 
     const $headerContainer = document.createElement('section');
