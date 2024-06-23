@@ -10,12 +10,12 @@ export class ProductCard {
     const { product_id, name, colors, images, priceRange } = this.data;
 
     const $productContainer = document.createElement('div');
-    const $productImgContainer = document.createElement('div');
+    const $imgContainer = document.createElement('div');
     const $productImg = document.createElement('img');
-    const $productColor = document.createElement('div');
-    const $productName = document.createElement('div');
-    const $productPrice = document.createElement('div');
-    const $productColorOptionsContainer = document.createElement('div');
+    const $selectedColor = document.createElement('div');
+    const $name = document.createElement('div');
+    const $price = document.createElement('div');
+    const $colorsContainer = document.createElement('div');
 
     const colorsMap = colors.map(curColor => {
       const $colorBtn = document.createElement('button');
@@ -29,33 +29,31 @@ export class ProductCard {
 
     const primaryColor = colors[0];
 
-    $productColorOptionsContainer.className =
-      'products-container__color-options';
-    $productColorOptionsContainer.append(...colorsMap);
+    $colorsContainer.className = 'products-container__colors-container';
+    $colorsContainer.append(...colorsMap);
 
-    $productImgContainer.append($productImg);
+    $imgContainer.append($productImg);
     $productImg.src = images[0].image_url;
     $productImg.alt = product_id;
-    $productColor.textContent =
+    $selectedColor.textContent =
       primaryColor[0].toUpperCase() + primaryColor.slice(1);
-    $productName.textContent = name;
-    $productPrice.textContent = `$${priceRange.highest}`;
+    $name.textContent = name;
+    $price.textContent = `$${priceRange.highest}`;
 
-    $productPrice.className = 'product-container__product-price';
-    $productName.className = 'product-container__product-name';
-    $productColor.className = 'product-container__product-color';
+    $price.className = 'product-container__product-price';
+    $name.className = 'product-container__name';
+    $selectedColor.className = 'product-container__selected-color';
     $productContainer.className = 'product-container';
 
-    $productImgContainer.className =
-      'product-container__product-image-container';
-    $productImg.className = 'product-container__product-image';
+    $imgContainer.className = 'product-container__img-container';
+    $productImg.className = 'product-container__img';
 
     $productContainer.append(
-      $productImgContainer,
-      $productColor,
-      $productName,
-      $productPrice,
-      $productColorOptionsContainer
+      $imgContainer,
+      $selectedColor,
+      $name,
+      $price,
+      $colorsContainer
     );
     return $productContainer;
   }
