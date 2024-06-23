@@ -25,6 +25,8 @@ class App {
 
     $headerTitle.textContent = 'Latest Arrivals';
     $viewAllBtn.textContent = 'View all';
+    $viewAllBtn.className = 'header-container__view-all-btn';
+
     $headerContainer.append($headerTitle, $viewAllBtn);
     $productsContainer.append(..._products.slice(0, 8));
     this.$appContainer.append($headerContainer, $productsContainer);

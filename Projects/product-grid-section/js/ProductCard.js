@@ -27,15 +27,23 @@ export class ProductCard {
       return $colorBtn;
     });
 
+    const primaryColor = colors[0];
+
+    $productColorOptionsContainer.className =
+      'products-container__color-options';
     $productColorOptionsContainer.append(...colorsMap);
 
     $productImgContainer.append($productImg);
     $productImg.src = images[0].image_url;
     $productImg.alt = product_id;
-    $productColor.textContent = colors[0];
+    $productColor.textContent =
+      primaryColor[0].toUpperCase() + primaryColor.slice(1);
     $productName.textContent = name;
     $productPrice.textContent = `$${priceRange.highest}`;
 
+    $productPrice.className = 'product-container__product-price';
+    $productName.className = 'product-container__product-name';
+    $productColor.className = 'product-container__product-color';
     $productContainer.className = 'product-container';
 
     $productImgContainer.className =
