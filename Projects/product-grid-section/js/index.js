@@ -16,11 +16,15 @@ class App {
     const $headerContainer = document.createElement('section');
     const $headerTitle = document.createElement('span');
     const $viewAllBtn = document.createElement('button');
+    const $productsContainer = document.createElement('section');
+
+    $productsContainer.className = 'products-container';
 
     $headerTitle.textContent = 'Latest Arrivals';
     $viewAllBtn.textContent = 'View all';
     $headerContainer.append($headerTitle, $viewAllBtn);
-    this.$appContainer.append($headerContainer, ..._products);
+    $productsContainer.append(..._products);
+    this.$appContainer.append($headerContainer, $productsContainer);
   }
 
   async fetchProducts() {
