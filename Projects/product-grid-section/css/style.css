@@ -49,3 +49,12 @@ body {
   grid-template-columns: repeat(4, 17.5rem);
   grid-gap: 2rem;
 }
+
+.color-btn {
+  width: 10px;
+  height: 10px;
+  border: 1px solid grey;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  padding: 0px;
+}

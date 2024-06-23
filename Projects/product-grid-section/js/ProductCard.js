@@ -1,3 +1,5 @@
+import { COLOR_VALUES } from './utils.js';
+
 export class ProductCard {
   constructor(data) {
     this.data = data;
@@ -13,7 +15,19 @@ export class ProductCard {
     const $productColor = document.createElement('div');
     const $productName = document.createElement('div');
     const $productPrice = document.createElement('div');
-    const $productColorOptions = document.createElement('img');
+    const $productColorOptionsContainer = document.createElement('div');
+
+    const colorsMap = colors.map(curColor => {
+      const $colorBtn = document.createElement('button');
+      $colorBtn.addEventListener('click', () => {
+        console.log(curColor);
+      });
+      $colorBtn.style.backgroundColor = COLOR_VALUES[curColor.toUpperCase()];
+      $colorBtn.className = 'color-btn';
+      return $colorBtn;
+    });
+
+    $productColorOptionsContainer.append(...colorsMap);
 
     $productImgContainer.append($productImg);
     $productImg.src = images[0].image_url;
@@ -33,7 +47,7 @@ export class ProductCard {
       $productColor,
       $productName,
       $productPrice,
-      $productColorOptions
+      $productColorOptionsContainer
     );
     return $productContainer;
   }
