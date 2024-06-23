@@ -18,12 +18,15 @@ class App {
     const $viewAllBtn = document.createElement('button');
     const $productsContainer = document.createElement('section');
 
+    $headerContainer.className = 'header-container';
+    $headerTitle.className = 'header-container__header-title';
+    $viewAllBtn.className = 'header-container__view-all-btn';
     $productsContainer.className = 'products-container';
 
     $headerTitle.textContent = 'Latest Arrivals';
     $viewAllBtn.textContent = 'View all';
     $headerContainer.append($headerTitle, $viewAllBtn);
-    $productsContainer.append(..._products);
+    $productsContainer.append(..._products.slice(0, 8));
     this.$appContainer.append($headerContainer, $productsContainer);
   }
 
