@@ -90,7 +90,7 @@ body {
     background-color: var(--buttonPrimaryColorHover);
   }
   &:disabled {
-    color: var(----textButtonDisabledColor);
+    color: var(--textButtonDisabledColor);
     background-color: var(--buttonFocusOutlineColor);
   }
 }

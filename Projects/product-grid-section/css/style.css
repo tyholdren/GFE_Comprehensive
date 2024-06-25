@@ -1,3 +1,61 @@
+::root {
+  --primary: #171717;
+  --primary-hover: #0a0a0a;
+  --primary-invert: #fff;
+  --secondary: #525252;
+  --tertiary: #737373;
+  --brand: #4338ca;
+  --disabled: #a3a3a3;
+  --error: #dc2626;
+  --error-emphasize: #991b1b;
+  --success: #15803d;
+  --warning: #a16207;
+
+  --background-primary: #fff;
+  --background-primary-inverted: #0a0a0a;
+  --background-primary-hover: #fafafa;
+  --background-secondary: #e5e7eb;
+  --background-secondary-hover: #d1d5db;
+  --background-tertiary: #fafafa;
+  --background-disabled: #f5f5f5;
+  --background-disabled-emphasize: #f3f4f6;
+  --background-brand-primary: #4338ca;
+  --background-brand-primary-emphasize: #3730a3;
+  --background-error: #dc2626;
+  --background-error-emphasize: #b91c1c;
+  --background-error-subtle: #fef2f2;
+  --background-success-subtle: #f0fdf4;
+  --background-brand-subtle: #eef2ff;
+  --background-neutral-subtle: #f9fafb;
+  --background-warning-subtle: #fffbeb;
+
+  --line-primary: #e5e5e5;
+  --line-secondary: #9ca3af;
+  --line-success: #bbf7d0;
+  --line-brand-solid: #4f46e5;
+  --line-brand-subtle: #c7d2fe;
+  --line-error-subtle: #fecaca;
+  --line-warning-subtle: #fde68a;
+
+  --icon-emphasize: #404040;
+  --icon-primary: #a3a3a3;
+  --icon-primary-hover: #737373;
+  --icon-brand: #6366f1;
+  --icon-brand-background: #eef2ff;
+  --icon-success: #15803d;
+  --icon-error: #dc2626;
+  --icon-warning: #facc15;
+
+  --text-title: #404040;
+  --text-placeholder: #737373;
+  --text-hint: #737373;
+  --text-filled: #171717;
+  --text-disabled: #a3a3a3;
+  --text-error: #dc2626;
+  --input-background: #fafafa;
+  --border: #e5e5e5;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -38,23 +96,23 @@ body {
 
 .header-container__view-all-btn {
   padding: 0.625em;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border);
   border-radius: 0.5rem;
   background-color: white;
   color: black;
   font-size: 1rem;
   line-height: 1.5rem;
-  box-shadow: 0 0 3px #e5e5e5;
+  box-shadow: 0 0 3px var(--border);
 }
 
 .header-container__view-all-btn:hover {
-  background-color: #fafafa;
+  background-color: var(--background-primary-hover);
   cursor: pointer;
 }
 
 .header-container__view-all-btn:focus {
   outline: 3px solid #c7d2fe;
-  background-color: #fafafa;
+  background-color: var(--background-primary-over);
 }
 
 .header-container__view-all-btn:disabled {
