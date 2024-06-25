@@ -106,7 +106,7 @@ export class ProductCard {
 
     $productContainer.tabIndex = '0';
     $productContainer.addEventListener('focus', () => {
-      productContainer.focus();
+      $productContainer.focus();
     });
     $productContainer.append(
       $imgContainer,
