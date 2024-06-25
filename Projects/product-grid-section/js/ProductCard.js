@@ -58,7 +58,10 @@ export class ProductCard {
         this.updateSelection(this.imgId, curColor);
       });
       $colorBtn.style.backgroundColor = COLOR_VALUES[curColor.toUpperCase()];
-      $colorBtn.className = 'color-btn';
+      $colorBtn.classList.add('color-btn');
+      if (curColor === 'white') {
+        $colorBtn.classList.add('color-btn--white');
+      }
       return $colorBtn;
     });
 
