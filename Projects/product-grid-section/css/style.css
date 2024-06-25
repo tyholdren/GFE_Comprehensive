@@ -51,6 +51,20 @@ body {
   height: 29.25rem;
 }
 
+.product-container:hover {
+  cursor: pointer;
+}
+
+.product-container:hover .product-container__name {
+  color: #4338ca;
+  cursor: pointer;
+}
+
+.product-container:focus {
+  outline: 3px solid #c7d2fe;
+  border-radius: 0.5rem;
+}
+
 .img-container {
   height: 18.75rem;
   overflow: hidden;

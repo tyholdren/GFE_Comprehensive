@@ -82,6 +82,10 @@ export class ProductCard {
     $imgContainer.className = 'img-container';
     $productImg.className = 'img-container__img';
 
+    $productContainer.tabIndex = '0';
+    $productContainer.addEventListener('focus', () => {
+      productContainer.focus();
+    });
     $productContainer.append(
       $imgContainer,
       $selectedColor,
