@@ -150,7 +150,7 @@ body {
 }
 
 .color-btn--white {
-  border: 1px solid green;
+  border: 1px solid var(--secondary);
 }
 
 .colors-container {

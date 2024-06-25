@@ -93,7 +93,7 @@ export class ProductCard {
         $listPrice.style.textDecoration = 'line-through';
         $priceContainer.append($salePrice, $listPrice);
       } else {
-        $priceContainer.append($salePrice);
+        $priceContainer.append($listPrice);
       }
     }
 
