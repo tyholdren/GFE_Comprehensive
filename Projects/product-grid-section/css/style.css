@@ -38,11 +38,28 @@ body {
 
 .header-container__view-all-btn {
   padding: 0.625em;
-  border: 1px solid grey;
+  border: 1px solid #e5e5e5;
   border-radius: 0.5rem;
   background-color: white;
   color: black;
   font-size: 1rem;
+  line-height: 1.5rem;
+  box-shadow: 0 0 3px #e5e5e5;
+}
+
+.header-container__view-all-btn:hover {
+  background-color: #fafafa;
+  cursor: pointer;
+}
+
+.header-container__view-all-btn:focus {
+  outline: 3px solid #c7d2fe;
+  background-color: #fafafa;
+}
+
+.header-container__view-all-btn:disabled {
+  background-color: #f5f5f5;
+  color: #a3a3a3;
 }
 
 .product-container {
