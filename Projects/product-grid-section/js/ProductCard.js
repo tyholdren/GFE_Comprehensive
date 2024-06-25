@@ -4,29 +4,26 @@ export class ProductCard {
   constructor(data, index) {
     this.data = data;
     this.imgId = `product-card-${index}`;
-    this.colors = {};
+    this.colorOptions = {};
     this.selectedColor = null;
   }
 
   setInitialColors(images) {
     images.forEach(({ color, image_url }) => {
-      if (!this.colors.hasOwnProperty(color)) {
-        this.colors[color] = image_url;
+      if (!this.colorOptions.hasOwnProperty(color)) {
+        this.colorOptions[color] = image_url;
       }
     });
   }
 
   formatUpperCase(string) {
-    console.log({ string });
-    const newString = string[0].toUpperCase() + string.slice(1);
-    console.log({ newString });
-    return newString;
+    return string[0].toUpperCase() + string.slice(1);
   }
 
   updateSelection(imgId, newColor) {
     this.updateCurrentColor(newColor);
     const curImg = document.getElementById(imgId);
-    curImg.src = this.colors[newColor];
+    curImg.src = this.colorOptions[newColor];
   }
 
   updateCurrentColor(newColor) {
@@ -66,11 +63,11 @@ export class ProductCard {
       return $colorBtn;
     });
 
-    $colorsContainer.className = 'products-container__colors-container';
+    $colorsContainer.className = 'colors-container';
     $colorsContainer.append(...colorsMap);
 
     $imgContainer.append($productImg);
-    $productImg.src = this.colors[this.selectedColor.color];
+    $productImg.src = this.colorOptions[this.selectedColor.color];
     $productImg.alt = product_id;
     $selectedColor.id = this.selectedColor.id;
     $selectedColor.textContent = this.formatUpperCase(this.selectedColor.color);
