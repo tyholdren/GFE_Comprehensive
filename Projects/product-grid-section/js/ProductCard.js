@@ -6,7 +6,6 @@ export class ProductCard {
     this.imgId = `product-card-${index}`;
     this.colorOptions = {};
     this.selectedColor = null;
-    this.prices = [];
   }
 
   setInitialColors(images) {
@@ -33,9 +32,7 @@ export class ProductCard {
   }
 
   render() {
-    console.log(this.data);
-    const { product_id, name, colors, images, inventory, priceRange } =
-      this.data;
+    const { product_id, name, colors, images, inventory } = this.data;
 
     this.setInitialColors(images);
 
@@ -93,7 +90,7 @@ export class ProductCard {
         $listPrice.style.textDecoration = 'line-through';
         $priceContainer.append($salePrice, $listPrice);
       } else {
-        $priceContainer.append($salePrice);
+        $priceContainer.append($listPrice);
       }
     }
 
