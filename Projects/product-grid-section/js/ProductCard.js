@@ -6,6 +6,7 @@ export class ProductCard {
     this.imgId = `product-card-${index}`;
     this.colorOptions = {};
     this.selectedColor = null;
+    this.prices = [];
   }
 
   setInitialColors(images) {
@@ -33,7 +34,8 @@ export class ProductCard {
 
   render() {
     console.log(this.data);
-    const { product_id, name, colors, images, priceRange } = this.data;
+    const { product_id, name, colors, images, inventory, priceRange } =
+      this.data;
 
     this.setInitialColors(images);
 
@@ -72,9 +74,29 @@ export class ProductCard {
     $selectedColor.id = this.selectedColor.id;
     $selectedColor.textContent = this.formatUpperCase(this.selectedColor.color);
     $name.textContent = name;
-    $price.textContent = `$${priceRange.highest}`;
 
-    $price.className = 'product-container__product-price';
+    const $priceContainer = document.createElement('div');
+    $priceContainer.className = 'price-container';
+
+    if (inventory.length > 0) {
+      const { list_price, sale_price } = inventory[0];
+
+      const $listPrice = document.createElement('div');
+      $listPrice.textContent = `$${list_price}`;
+
+      let $salePrice = null;
+
+      if (sale_price < list_price) {
+        $salePrice = document.createElement('div');
+        $salePrice.textContent = `$${sale_price}`;
+
+        $listPrice.style.textDecoration = 'line-through';
+        $priceContainer.append($salePrice, $listPrice);
+      } else {
+        $priceContainer.append($salePrice);
+      }
+    }
+
     $name.className = 'product-container__name';
     $selectedColor.className = 'product-container__selected-color';
     $productContainer.className = 'product-container';
@@ -90,7 +112,7 @@ export class ProductCard {
       $imgContainer,
       $selectedColor,
       $name,
-      $price,
+      $priceContainer,
       $colorsContainer
     );
     return $productContainer;

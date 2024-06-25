@@ -91,11 +91,17 @@ body {
   color: #171717;
 }
 
-.product-container__price {
+.price-container {
+  display: flex;
+  gap: 0.5rem;
   margin-top: 0.75rem;
   font-size: 1.125rem;
   line-height: 1.75rem;
   color: #737373;
+}
+
+.price-container :last-child {
+  font-size: 0.9rem;
 }
 
 .products-container {
