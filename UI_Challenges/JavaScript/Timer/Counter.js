@@ -1,8 +1,9 @@
 export class Counter {
   constructor() {
     this.$appContainer = document.getElementById('app-container');
-    this.count = 125;
-    this.formattedCount = '2 : 05';
+    this.intervalId = null;
+    this.count = 3601;
+    this.formattedCount = '01 : 00 : 01';
   }
 
   decrementCount() {
@@ -18,9 +19,12 @@ export class Counter {
   }
 
   formatSeconds() {
-    const mins = Math.floor(this.count / 60);
-    const seconds = String(this.count - 60 * mins);
-    this.formattedCount = `${mins} : ${seconds.padStart(2, '0')}`;
+    const hours = Math.floor(this.count / 3600);
+    const mins = Math.floor((this.count % 3600) / 60);
+    const seconds = this.count % 60;
+    this.formattedCount = `${hours.toString().padStart(2, '0')} : ${mins
+      .toString()
+      .padStart(2, '0')} : ${seconds.toString().padStart(2, '0')}`;
   }
 
   initialize() {
@@ -31,6 +35,9 @@ export class Counter {
     this.$appContainer.append($count);
     this.intervalId = setInterval(() => {
       this.decrementCount();
+      if (this.count === 0) {
+        clearInterval(this.intervalId);
+      }
     }, 1000);
   }
 }
