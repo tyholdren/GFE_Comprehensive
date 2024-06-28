@@ -1,24 +1,33 @@
 /**
- * https://www.greatfrontend.com/questions/javascript/deep-map
  * @param {any} value
  * @param {Function} fn
  * @returns any
  */
-export default function deepMap(value, fn) {
-  if (Array.isArray(value)) {
-    const deepArr = [];
+function deepMap(value, fn) {
+  return mapHelper(value, fn, value);
+}
 
-    for (let i = 0; i < value.length; i += 1) {
-      deepArr.push(deepMap(value[i], fn.bind(this)));
-    }
-    return deepArr;
-  } else if (typeof value === 'object') {
-    const deepObj = {};
-    for (const [key, val] of Object.entries(value)) {
-      deepObj[key] = deepMap(val, fn.bind(this));
-    }
-    return deepObj;
-  } else {
-    return fn(value);
+function isPlainObject(value) {
+  if (value === null) {
+    return false;
   }
+
+  const prototype = Object.getPrototypeOf(value);
+  return prototype === null || prototype === Object.prototype;
+}
+
+function mapHelper(value, fn, context) {
+  if (Array.isArray(value)) {
+    return value.map(el => mapHelper(el, fn, context));
+  }
+  if (isPlainObject(value)) {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, val]) => [
+        key,
+        mapHelper(val, fn, context),
+      ])
+    );
+  }
+
+  return fn.apply(context, [value]);
 }
