@@ -6,19 +6,19 @@
  * @returns {{start: Function, pause: Function, stop: Function}}
  */
 export default function createResumableInterval(callback, delay, ...args) {
-  let intervalId = null;
   let isStopped = false;
+  let intervalId = null;
 
   return {
     start: () => {
-      if (isStopped || intervalId !== null) {
-        return;
+      if (!isStopped) {
+        if (intervalId === null) {
+          callback.apply(this, args);
+        }
+        intervalId = setInterval(() => {
+          callback.apply(this, args);
+        }, delay);
       }
-
-      callback(...args);
-      intervalId = setInterval(() => {
-        callback.apply(this, args);
-      }, delay);
     },
 
     pause: () => {
@@ -29,7 +29,6 @@ export default function createResumableInterval(callback, delay, ...args) {
     stop: () => {
       isStopped = true;
       clearInterval(intervalId);
-      intervalId = null;
     },
   };
 }
