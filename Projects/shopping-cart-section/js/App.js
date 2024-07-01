@@ -1,3 +1,4 @@
+import { OrderSummary } from './OrderSummary.js';
 import { Product } from './Product.js';
 
 export class App {
@@ -25,18 +26,17 @@ export class App {
     const products = await this.fetchProducts();
 
     const $title = document.createElement('h1');
+    const $contentContainer = document.createElement('section');
     const $productsContainer = document.createElement('div');
-    const $orderSummaryContainer = document.createElement('div');
+    const $orderSummary = new OrderSummary().render();
 
     $title.textContent = 'Shopping Cart';
     $productsContainer.className = 'products-container';
+    $contentContainer.className = 'content-container';
 
     $productsContainer.append(...products);
-    this.$appContainer.append(
-      $title,
-      $productsContainer,
-      $orderSummaryContainer
-    );
+    $contentContainer.append($productsContainer, $orderSummary);
+    this.$appContainer.append($title, $contentContainer);
   }
 }
 
