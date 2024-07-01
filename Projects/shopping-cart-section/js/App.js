@@ -2,6 +2,7 @@ import { Product } from './Product.js';
 
 export class App {
   constructor() {
+    this.isEmpty = false;
     this.$appContainer = document.getElementById('app-container');
     this.URL =
       'https://www.greatfrontend.com/api/projects/challenges/e-commerce/cart-sample';
@@ -22,12 +23,20 @@ export class App {
 
   async initialize() {
     const products = await this.fetchProducts();
-    console.log({ products });
+
+    const $title = document.createElement('h1');
     const $productsContainer = document.createElement('div');
     const $orderSummaryContainer = document.createElement('div');
 
+    $title.textContent = 'Shopping Cart';
+    $productsContainer.className = 'products-container';
+
     $productsContainer.append(...products);
-    this.$appContainer.append($productsContainer, $orderSummaryContainer);
+    this.$appContainer.append(
+      $title,
+      $productsContainer,
+      $orderSummaryContainer
+    );
   }
 }
 
