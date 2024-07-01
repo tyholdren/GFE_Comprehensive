@@ -1,3 +1,5 @@
+import { QuantityButton } from './QuantityButton.js';
+
 export class Product {
   constructor(data, index) {
     this.data = data;
@@ -17,8 +19,7 @@ export class Product {
     const $color = document.createElement('div');
     const $size = document.createElement('div');
     const $description = document.createElement('div');
-    const $quantityContainer = document.createElement('div');
-    const $quantity = document.createElement('div');
+    const $quantity = new QuantityButton().render();
     const $removeBtn = document.createElement('button');
     const $priceContainer = document.createElement('div');
     const $listPrice = document.createElement('div');
@@ -30,7 +31,6 @@ export class Product {
     $color.textContent = color;
     $size.textContent = size;
     $description.textContent = description;
-    $quantity.textContent = 1;
     $removeBtn.textContent = 'Remove';
     $listPrice.textContent = list_price;
     $salePrice.textContent = sale_price;
