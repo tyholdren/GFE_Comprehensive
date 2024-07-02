@@ -19,6 +19,8 @@ export class OrderSummary {
     $totalValue.textContent = '$100';
     $checkoutBtn.textContent = 'Checkout';
 
+    $totalValue.id = 'total-value';
+
     $orderSummaryContainer.className = 'order-summary-container';
     $orderSummaryContainer.append(
       $heading,

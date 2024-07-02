@@ -19,7 +19,7 @@ export class Product {
     const $color = document.createElement('div');
     const $size = document.createElement('div');
     const $description = document.createElement('div');
-    const $quantity = new QuantityButton().render();
+    const $quantity = new QuantityButton(sale_price, product_id).render();
     const $removeBtn = document.createElement('button');
     const $priceContainer = document.createElement('div');
     const $listPrice = document.createElement('div');
@@ -42,8 +42,8 @@ export class Product {
       $description,
       $quantity,
       $removeBtn,
-      $listPrice,
-      $salePrice
+      $salePrice,
+      $listPrice
     );
 
     $productContainer.className = 'product-container';
