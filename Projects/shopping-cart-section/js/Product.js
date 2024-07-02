@@ -32,8 +32,11 @@ export class Product {
     $size.textContent = size;
     $description.textContent = description;
     $removeBtn.textContent = 'Remove';
-    $listPrice.textContent = list_price;
     $salePrice.textContent = sale_price;
+    $listPrice.textContent = list_price;
+
+    $salePrice.id = `sale-price_${product_id}`;
+    $removeBtn.id = `remove-btn_${product_id}`;
 
     $contentContainer.append(
       $title,

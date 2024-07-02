@@ -4,23 +4,6 @@ export class QuantityButton {
     this.productId = product_id;
   }
 
-  updateTotalValue(addingProduct) {
-    let $totalPrice = document.getElementById('total-value');
-    const existingPrice = Number($totalPrice.textContent.slice(1));
-
-    const newPrice = addingProduct
-      ? existingPrice + this.productPrice
-      : existingPrice - this.productPrice;
-
-    $totalPrice.textContent = '$' + String(newPrice);
-  }
-
-  updateQty(addingProduct) {
-    let $qty = document.getElementById(`${this.productId}-qty`);
-    const $exgQty = Number($qty.textContent);
-    $qty.textContent = addingProduct ? $exgQty + 1 : $exgQty - 1;
-  }
-
   render() {
     const $qtyContainer = document.createElement('div');
     const $decrementBtn = document.createElement('button');
@@ -31,17 +14,10 @@ export class QuantityButton {
     $qty.textContent = 0;
     $incrementBtn.textContent = '+';
 
-    $decrementBtn.addEventListener('click', () => {
-      this.updateTotalValue(false);
-      this.updateQty(false);
-    });
+    $decrementBtn.id = `decrement-btn_${this.productId}`;
+    $incrementBtn.id = `increment-btn_${this.productId}`;
 
-    $incrementBtn.addEventListener('click', () => {
-      this.updateTotalValue(true);
-      this.updateQty(true);
-    });
-
-    $qty.id = `${this.productId}-qty`;
+    $qty.id = `qty_${this.productId}`;
     $qtyContainer.className = 'qty-btn-container';
     $qtyContainer.append($decrementBtn, $qty, $incrementBtn);
     return $qtyContainer;
