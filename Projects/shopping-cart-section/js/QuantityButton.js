@@ -4,21 +4,21 @@ export class QuantityButton {
     this.productId = product_id;
   }
 
-  updateTotalValue(addProduct) {
+  updateTotalValue(addingProduct) {
     let $totalPrice = document.getElementById('total-value');
     const existingPrice = Number($totalPrice.textContent.slice(1));
 
-    const newPrice = addProduct
+    const newPrice = addingProduct
       ? existingPrice + this.productPrice
       : existingPrice - this.productPrice;
 
     $totalPrice.textContent = '$' + String(newPrice);
   }
 
-  updateQty(addProduct) {
+  updateQty(addingProduct) {
     let $qty = document.getElementById(`${this.productId}-qty`);
     const $exgQty = Number($qty.textContent);
-    $qty.textContent = addProduct ? $exgQty + 1 : $exgQty - 1;
+    $qty.textContent = addingProduct ? $exgQty + 1 : $exgQty - 1;
   }
 
   render() {
