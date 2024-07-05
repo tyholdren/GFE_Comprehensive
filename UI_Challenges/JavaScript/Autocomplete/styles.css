@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.inactive-item {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.content-container {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.item-container {
+  margin-top: 0.25rem;
+  display: flex;
+  gap: 2rem;
+  width: 50%;
+}
+
+.saved-items-container {
+  width: 50%;
+}
