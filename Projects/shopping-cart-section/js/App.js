@@ -1,3 +1,4 @@
+import { handleEvent } from './eventHandlers.js';
 import { OrderSummary } from './OrderSummary.js';
 import { Product } from './Product.js';
 import { updateTotalValue, updateQty, getProductId } from './utils.js';
@@ -40,45 +41,9 @@ export class App {
     $productsContainer.className = 'products-container';
     $contentContainer.className = 'content-container';
 
-    $contentContainer.addEventListener('click', event => {
-      const { id, tagName } = event.target;
-      const productId = getProductId(id);
-      const productContainerId = `product-container_${productId}`;
-      const salePriceId = `sale-price_${productId}`;
-      const qtyId = `qty_${productId}`;
-      let qty = Number(document.getElementById(qtyId).textContent);
-      const $decrementBtn = document.getElementById(
-        `decrement-btn_${productId}`
-      );
-      const $incrementBtn = document.getElementById(
-        `increment-btn_${productId}`
-      );
-      const stock = this.productsMetaData.get(productId);
-
-      if (tagName === 'BUTTON') {
-        if (id.includes('remove') && qty === 1) {
-          qty -= 1;
-          updateTotalValue(false, salePriceId);
-          updateQty(qtyId, qty);
-
-          const $child = document.getElementById(productContainerId);
-          $productsContainer.removeChild($child);
-        } else if (id.includes('increment')) {
-          qty += 1;
-          updateTotalValue(true, salePriceId);
-          updateQty(qtyId, qty);
-
-          $incrementBtn.disabled = qty === stock ? true : false;
-          $decrementBtn.disabled = qty > 1 ? false : true;
-        } else if (id.includes('decrement')) {
-          qty -= 1;
-          $decrementBtn.disabled = qty === 1 ? true : false;
-          $incrementBtn.disabled = qty === stock ? true : false;
-          updateTotalValue(false, salePriceId);
-          updateQty(qtyId, qty);
-        }
-      }
-    });
+    $contentContainer.addEventListener('click', event =>
+      handleEvent(event, this.productsMetaData, $productsContainer)
+    );
 
     $productsContainer.append(...products);
     $contentContainer.append($productsContainer, $orderSummary);
