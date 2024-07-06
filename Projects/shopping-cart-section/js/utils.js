@@ -3,11 +3,22 @@ export const updateTotalValue = (addingProduct, productId) => {
   const existingPrice = Number($totalPrice.textContent.slice(1));
   const salePrice = Number(document.getElementById(productId).textContent);
 
-  const newPrice = addingProduct
+  let newPrice = addingProduct
     ? existingPrice + salePrice
     : existingPrice - salePrice;
 
-  $totalPrice.textContent = '$' + String(newPrice);
+  const priceAsString = newPrice.toString();
+
+  if (priceAsString.includes('.')) {
+    const priceArr = priceAsString.split('.');
+    const dollars = priceArr[0];
+    const cents = priceArr[1].padEnd(2, '0');
+    newPrice = `${dollars}.${cents}`;
+  } else {
+    newPrice += '.00';
+  }
+
+  $totalPrice.textContent = '$' + newPrice;
 };
 
 export const updateQty = (qtyId, qtyValue) => {

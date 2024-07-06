@@ -1,6 +1,6 @@
 import { updateTotalValue, updateQty, getProductId } from './utils.js';
 
-export const handleEvent = (event, productsMetaData, productsContainer) => {
+export const handleEvent = (event, productsMetaData, $productsContainer) => {
   const { id, tagName } = event.target;
   const productId = getProductId(id);
   const productContainerId = `product-container_${productId}`;
@@ -18,7 +18,7 @@ export const handleEvent = (event, productsMetaData, productsContainer) => {
       updateQty(qtyId, qty);
 
       const $child = document.getElementById(productContainerId);
-      productsContainer.removeChild($child);
+      $productsContainer.removeChild($child);
     } else if (id.includes('increment')) {
       qty += 1;
       updateTotalValue(true, salePriceId);

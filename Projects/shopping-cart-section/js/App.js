@@ -1,7 +1,6 @@
 import { handleEvent } from './eventHandlers.js';
 import { OrderSummary } from './OrderSummary.js';
 import { Product } from './Product.js';
-import { updateTotalValue, updateQty, getProductId } from './utils.js';
 
 export class App {
   constructor() {
@@ -22,7 +21,6 @@ export class App {
       items.forEach(({ product, unit }) => {
         this.productsMetaData.set(product.product_id, unit.stock);
       });
-      console.log(this.productsMetaData);
       return products;
     } catch (error) {
       console.log({ error });
