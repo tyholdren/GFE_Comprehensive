@@ -29,3 +29,18 @@ export const updateQty = (qtyId, qtyValue) => {
 export const getProductId = id => {
   return id.split('_')[1];
 };
+
+export const updateButtons = ($decrementBtn, $incrementBtn, qty, stock) => {
+  $incrementBtn.disabled = qty === stock;
+  $decrementBtn.disabled = qty <= 1;
+};
+
+export const handleQuantityChange = (
+  addingProduct,
+  productId,
+  qtyId,
+  qtyValue
+) => {
+  updateTotalValue(addingProduct, productId);
+  updateQty(qtyId, qtyValue);
+};

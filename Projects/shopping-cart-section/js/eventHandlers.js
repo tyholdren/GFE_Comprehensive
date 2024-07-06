@@ -1,4 +1,10 @@
-import { updateTotalValue, updateQty, getProductId } from './utils.js';
+import {
+  updateTotalValue,
+  updateQty,
+  getProductId,
+  updateButtons,
+  handleQuantityChange,
+} from './utils.js';
 
 export const handleEvent = (event, productsMetaData, $productsContainer) => {
   const { id, tagName } = event.target;
@@ -14,24 +20,17 @@ export const handleEvent = (event, productsMetaData, $productsContainer) => {
   if (tagName === 'BUTTON') {
     if (id.includes('remove') && qty === 1) {
       qty -= 1;
-      updateTotalValue(false, salePriceId);
-      updateQty(qtyId, qty);
-
+      handleQuantityChange(false, salePriceId, qtyId, qty);
       const $child = document.getElementById(productContainerId);
       $productsContainer.removeChild($child);
     } else if (id.includes('increment')) {
       qty += 1;
-      updateTotalValue(true, salePriceId);
-      updateQty(qtyId, qty);
-
-      $incrementBtn.disabled = qty === stock ? true : false;
-      $decrementBtn.disabled = qty > 1 ? false : true;
+      updateButtons($decrementBtn, $incrementBtn, qty, stock);
+      handleQuantityChange(true, salePriceId, qtyId, qty);
     } else if (id.includes('decrement')) {
       qty -= 1;
-      $decrementBtn.disabled = qty === 1 ? true : false;
-      $incrementBtn.disabled = qty === stock ? true : false;
-      updateTotalValue(false, salePriceId);
-      updateQty(qtyId, qty);
+      updateButtons($decrementBtn, $incrementBtn, qty, stock);
+      handleQuantityChange(false, salePriceId, qtyId, qty);
     }
   }
 };
