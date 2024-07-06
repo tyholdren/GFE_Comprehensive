@@ -10,7 +10,7 @@ export class Product {
     const { product, unit } = this.data;
     const { description, name, product_id } = product;
     const { color, image_url, list_price, sale_price, size, sku, stock } = unit;
-
+    console.log({ stock });
     const $productContainer = document.createElement('div');
     const $image = document.createElement('img');
     const $contentContainer = document.createElement('div');

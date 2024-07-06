@@ -6,6 +6,7 @@ export class App {
   constructor() {
     this.isEmpty = false;
     this.$appContainer = document.getElementById('app-container');
+    this.productsMetaData = new Map();
     this.URL =
       'https://www.greatfrontend.com/api/projects/challenges/e-commerce/cart-sample';
   }
@@ -17,6 +18,10 @@ export class App {
       const products = items.map((product, index) => {
         return new Product(product, index).render();
       });
+      items.forEach(({ product, unit }) => {
+        this.productsMetaData.set(product.product_id, unit.stock);
+      });
+      console.log(this.productsMetaData);
       return products;
     } catch (error) {
       console.log({ error });
@@ -38,16 +43,20 @@ export class App {
     $contentContainer.addEventListener('click', event => {
       const { id, tagName } = event.target;
       const productId = getProductId(id);
+      const productContainerId = `product-container_${productId}`;
       const salePriceId = `sale-price_${productId}`;
       const qtyId = `qty_${productId}`;
-      const productContainerId = `product-container_${productId}`;
       let qty = Number(document.getElementById(qtyId).textContent);
       const $decrementBtn = document.getElementById(
         `decrement-btn_${productId}`
       );
+      const $incrementBtn = document.getElementById(
+        `increment-btn_${productId}`
+      );
+      const stock = this.productsMetaData.get(productId);
 
       if (tagName === 'BUTTON') {
-        if (id.includes('remove') && qty === '1') {
+        if (id.includes('remove') && qty === 1) {
           qty -= 1;
           updateTotalValue(false, salePriceId);
           updateQty(qtyId, qty);
@@ -59,10 +68,12 @@ export class App {
           updateTotalValue(true, salePriceId);
           updateQty(qtyId, qty);
 
-          qty > 1 ? ($decrementBtn.disabled = false) : true;
+          $incrementBtn.disabled = qty === stock ? true : false;
+          $decrementBtn.disabled = qty > 1 ? false : true;
         } else if (id.includes('decrement')) {
           qty -= 1;
-          qty === 1 ? ($decrementBtn.disabled = true) : false;
+          $decrementBtn.disabled = qty === 1 ? true : false;
+          $incrementBtn.disabled = qty === stock ? true : false;
           updateTotalValue(false, salePriceId);
           updateQty(qtyId, qty);
         }
