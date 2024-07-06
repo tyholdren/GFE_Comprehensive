@@ -10,10 +10,9 @@ export const updateTotalValue = (addingProduct, productId) => {
   $totalPrice.textContent = '$' + String(newPrice);
 };
 
-export const updateQty = (addingProduct, qtyId) => {
+export const updateQty = (qtyId, qtyValue) => {
   let $qty = document.getElementById(qtyId);
-  const $exgQty = Number($qty.textContent);
-  $qty.textContent = addingProduct ? $exgQty + 1 : $exgQty - 1;
+  $qty.textContent = qtyValue;
 };
 
 export const getProductId = id => {

@@ -41,20 +41,30 @@ export class App {
       const salePriceId = `sale-price_${productId}`;
       const qtyId = `qty_${productId}`;
       const productContainerId = `product-container_${productId}`;
-      const qty = document.getElementById(qtyId).textContent;
+      let qty = Number(document.getElementById(qtyId).textContent);
+      const $decrementBtn = document.getElementById(
+        `decrement-btn_${productId}`
+      );
 
       if (tagName === 'BUTTON') {
         if (id.includes('remove') && qty === '1') {
+          qty -= 1;
           updateTotalValue(false, salePriceId);
-          updateQty(false, qtyId);
+          updateQty(qtyId, qty);
+
           const $child = document.getElementById(productContainerId);
           $productsContainer.removeChild($child);
         } else if (id.includes('increment')) {
+          qty += 1;
           updateTotalValue(true, salePriceId);
-          updateQty(true, qtyId);
+          updateQty(qtyId, qty);
+
+          qty > 1 ? ($decrementBtn.disabled = false) : true;
         } else if (id.includes('decrement')) {
+          qty -= 1;
+          qty === 1 ? ($decrementBtn.disabled = true) : false;
           updateTotalValue(false, salePriceId);
-          updateQty(false, qtyId);
+          updateQty(qtyId, qty);
         }
       }
     });

@@ -14,6 +14,8 @@ export class QuantityButton {
     $qty.textContent = 1;
     $incrementBtn.textContent = '+';
 
+    $decrementBtn.disabled = $qty.textContent === '1' ? true : false;
+
     $decrementBtn.id = `decrement-btn_${this.productId}`;
     $incrementBtn.id = `increment-btn_${this.productId}`;
 
