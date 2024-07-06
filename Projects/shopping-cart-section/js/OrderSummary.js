@@ -16,7 +16,7 @@ export class OrderSummary {
     $shipping.textContent = 'Shipping';
     $addCoupon.textContent = 'Add Coupon Code';
     $total.textContent = 'Total';
-    $totalValue.textContent = '$100';
+    $totalValue.textContent = '$162.50';
     $checkoutBtn.textContent = 'Checkout';
 
     $totalValue.id = 'total-value';

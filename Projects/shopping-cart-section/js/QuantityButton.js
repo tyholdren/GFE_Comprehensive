@@ -11,7 +11,7 @@ export class QuantityButton {
     const $incrementBtn = document.createElement('button');
 
     $decrementBtn.textContent = '-';
-    $qty.textContent = 0;
+    $qty.textContent = 1;
     $incrementBtn.textContent = '+';
 
     $decrementBtn.id = `decrement-btn_${this.productId}`;

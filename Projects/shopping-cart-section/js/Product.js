@@ -12,16 +12,14 @@ export class Product {
     const { color, image_url, list_price, sale_price, size, sku, stock } = unit;
 
     const $productContainer = document.createElement('div');
-    // const $imageContainer = document.createElement('div');
     const $image = document.createElement('img');
     const $contentContainer = document.createElement('div');
     const $title = document.createElement('div');
     const $color = document.createElement('div');
     const $size = document.createElement('div');
     const $description = document.createElement('div');
-    const $quantity = new QuantityButton(sale_price, product_id).render();
+    const $qtyBtn = new QuantityButton(sale_price, product_id).render();
     const $removeBtn = document.createElement('button');
-    const $priceContainer = document.createElement('div');
     const $listPrice = document.createElement('div');
     const $salePrice = document.createElement('div');
 
@@ -43,7 +41,7 @@ export class Product {
       $color,
       $size,
       $description,
-      $quantity,
+      $qtyBtn,
       $removeBtn,
       $salePrice,
       $listPrice
