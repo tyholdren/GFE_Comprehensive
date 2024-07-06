@@ -33,6 +33,7 @@ export class Product {
     $salePrice.textContent = sale_price;
     $listPrice.textContent = list_price;
 
+    $productContainer.id = `product-container_${product_id}`;
     $salePrice.id = `sale-price_${product_id}`;
     $removeBtn.id = `remove-btn_${product_id}`;
 

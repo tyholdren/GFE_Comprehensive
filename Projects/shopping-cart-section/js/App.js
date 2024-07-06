@@ -40,10 +40,15 @@ export class App {
       const productId = getProductId(id);
       const salePriceId = `sale-price_${productId}`;
       const qtyId = `qty_${productId}`;
+      const productContainerId = `product-container_${productId}`;
+      const qty = document.getElementById(qtyId).textContent;
 
       if (tagName === 'BUTTON') {
-        if (id.includes('remove')) {
-          console.log('removing');
+        if (id.includes('remove') && qty === '1') {
+          updateTotalValue(false, salePriceId);
+          updateQty(false, qtyId);
+          const $child = document.getElementById(productContainerId);
+          $productsContainer.removeChild($child);
         } else if (id.includes('increment')) {
           updateTotalValue(true, salePriceId);
           updateQty(true, qtyId);
