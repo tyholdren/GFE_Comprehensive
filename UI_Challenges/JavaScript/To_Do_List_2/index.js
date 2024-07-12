@@ -14,6 +14,7 @@ export class App {
 
       const taskContainerId = `task-container_${this.index}`;
       this.$taskContainer.id = taskContainerId;
+      this.$taskContainer.className = 'task-container';
       this.$newTask.textContent = this.$input.value;
       this.$deleteBtn.id = `delete-btn_${this.index}`;
       this.$deleteBtn.textContent = 'delete';
