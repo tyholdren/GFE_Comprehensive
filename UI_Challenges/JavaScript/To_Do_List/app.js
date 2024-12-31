@@ -6,12 +6,21 @@ const DEFAULT_TO_DOS = [
   { id: 2, toDo: 'clean room', isEditing: false },
 ];
 
-export default class App {
+class App {
   constructor() {
     this.$appContainer = document.getElementById('app-container');
     this.$addTaskContainer = document.createElement('div');
     this.$tasksContainer = document.createElement('div');
-    this.toDos = [];
+    this.toDos = []; // ids of the to dos
+    this.toDos2 = [1, 2, 3];
+
+    const map = {
+      1: { toDo: 'walk dog', isEditing: false },
+      2: { toDo: 'walk dog', isEditing: false },
+      3: { toDo: 'walk dog', isEditing: false },
+    };
+
+    this.toDosMap = new Map(); // content of the todos with keys
     this.index = DEFAULT_TO_DOS.length;
   }
 
